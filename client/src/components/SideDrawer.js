@@ -2,14 +2,12 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import MailIcon from '@material-ui/icons/Mail';
+import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 
 const useStyles = makeStyles({
   list: {
@@ -39,8 +37,8 @@ export default function SideDrawer(props) {
           <ListItemText primary='Home' />
         </ListItem>
           <ListItem button>
-            <ListItemIcon><MailIcon /></ListItemIcon>
-            <ListItemText primary='Mail' />
+            <ListItemIcon><LocalFloristIcon /></ListItemIcon>
+            <ListItemText primary='Plants' />
           </ListItem>
       </List>
     </div>
