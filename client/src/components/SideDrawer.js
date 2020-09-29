@@ -7,7 +7,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
-import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
+import LocalFloristOutlinedIcon from '@material-ui/icons/LocalFloristOutlined';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import ContactMailIcon from '@material-ui/icons/ContactMail';
+import BusinessCenterRoundedIcon from '@material-ui/icons/BusinessCenterRounded';
 
 const useStyles = makeStyles({
   list: {
@@ -24,24 +27,36 @@ export default function SideDrawer(props) {
   return (
     <Drawer anchor='left' open={props.open} onClose={props.toggleDrawer(false)}>
       <div
-      className={clsx(classes.list, {
-        [classes.fullList]: false,
-      })}
-      role="presentation"
-      onClick={props.toggleDrawer(false)}
-      onKeyDown={props.toggleDrawer(false)}
-    >
-      <List>
-        <ListItem button>
-          <ListItemIcon><HomeIcon /></ListItemIcon>
-          <ListItemText primary='Home' />
-        </ListItem>
+        className={clsx(classes.list, {
+          [classes.fullList]: false,
+        })}
+        role="presentation"
+        onClick={props.toggleDrawer(false)}
+        onKeyDown={props.toggleDrawer(false)}
+      >
+        <List>
           <ListItem button>
-            <ListItemIcon><LocalFloristIcon /></ListItemIcon>
+            <ListItemIcon><HomeIcon /></ListItemIcon>
+            <ListItemText primary='Home' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon><BusinessCenterRoundedIcon /></ListItemIcon>
+            <ListItemText primary='About Us' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon><LocalFloristOutlinedIcon /></ListItemIcon>
             <ListItemText primary='Plants' />
           </ListItem>
-      </List>
-    </div>
+          <ListItem button>
+            <ListItemIcon><ContactSupportIcon /></ListItemIcon>
+            <ListItemText primary='FAQs' />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon><ContactMailIcon /></ListItemIcon>
+            <ListItemText primary='Contact Us' />
+          </ListItem>
+        </List>
+      </div>
     </Drawer>
   );
 }
