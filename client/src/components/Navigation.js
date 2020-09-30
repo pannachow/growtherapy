@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -93,8 +94,11 @@ export default function Navigation() {
                         }}
                         inputProps={{ 'aria-label': 'search' }}
                     />
-                    <Button>LOGIN</Button>
-                    <Button>SIGN UP</Button>
+                    <BrowserRouter>
+                    <Link to="/login"><Button>LOGIN</Button></Link>
+                    <Link to="/signUp"><Button>SIGN UP</Button></Link>
+                    </BrowserRouter>
+                    
                 </Toolbar>
             </AppBar>
             <SideDrawer open={state.open} toggleDrawer={toggleDrawer} />
