@@ -9,7 +9,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SideDrawer from './SideDrawer';
-import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
+import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,13 +77,16 @@ export default function Navigation() {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
+
                     <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                         <MenuIcon />
                     </IconButton>
-                    <LocalFloristIcon color="secondary" />&nbsp;
-                    <Typography variant="h6" color="secondary" className={classes.title}>
-                        GROWTHERAPY
-                    </Typography>
+                    <Link underline="none" component={RouterLink} to="/" className={classes.title}>
+                        <Typography variant="h6" color="secondary">
+                            GROWTHERAPY
+                        </Typography>
+                    </Link>
+
 
                     <SearchIcon />
                     <InputBase
@@ -93,8 +97,14 @@ export default function Navigation() {
                         }}
                         inputProps={{ 'aria-label': 'search' }}
                     />
-                    <Button>LOGIN</Button>
-                    <Button>SIGN UP</Button>
+                    <Link underline="none" component={RouterLink} to="/log-in">
+                        <Button>LOGIN</Button>
+                    </Link>
+
+                    <Link underline="none" component={RouterLink} to="/sign-up">
+                        <Button>SIGN UP</Button>
+                    </Link>
+
                 </Toolbar>
             </AppBar>
             <SideDrawer open={state.open} toggleDrawer={toggleDrawer} />
