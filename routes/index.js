@@ -15,8 +15,6 @@ router.get('/growtherapy', function(req, res, next) {
 
 
 
-
-
 /* 
 * Authorization Server - Return secret for any logged in user
 */
