@@ -1,7 +1,5 @@
 var express = require('express');
-const { SECRET_KEY } = require('../config');
 const { ensureUserLoggedIn } = require('../middleware/guards');
-const jwt = require("jsonwebtoken");
 const router = express.Router();
 
 const bodyParser = require("body-parser");
