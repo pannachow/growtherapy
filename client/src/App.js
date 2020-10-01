@@ -46,15 +46,14 @@ class App extends React.Component {
 class Routes extends React.Component {
   render() {
       return (
-
           <Switch>
 
               <Route path="/" exact>
-
+                <h2>Growtherapy</h2>
               </Route>
 
               <Route path="/about">
-
+                <h3>About page</h3>
               </Route>
 
               <Route path="/login">
