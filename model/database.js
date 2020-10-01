@@ -1,6 +1,6 @@
 require("dotenv").config();
 const mysql = require("mysql");
-const InitDbSql = require("./InitDbSql.js");
+const initdb = require("./initdb.sql");
 
 const DB_HOST = process.env.DB_HOST;
 const DB_USER = process.env.DB_USER;
@@ -20,7 +20,7 @@ con.connect(function(err) {
   console.log("Connected!");
 
 
-  con.query(InitDbSql, function(err, result) {
+  con.query(initdb, function(err, result) {
     if (err) throw err;
     console.log("Tables successfully created!");
 
