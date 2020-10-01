@@ -1,6 +1,8 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 DROP TABLE IF EXISTS plants_api_data;
 CREATE TABLE plants_api_data (
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     common_name VARCHAR(30) NOT NULL,
     scientific_name VARCHAR(30) NOT NULL,
     year VARCHAR(4) NOT NULL, family VARCHAR(20) NOT NULL,
@@ -10,8 +12,8 @@ CREATE TABLE plants_api_data (
 
 DROP TABLE IF EXISTS plants_input_data;
 CREATE TABLE plants_input_data (
-    id INT NOT NULL PRIMARY KEY,
-    plant_id INT, image_url VARCHAR(100) NOT NULL,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    plant_id INT, image_url VARCHAR(300) NOT NULL,
     water_needs INT NOT NULL, light_needs INT NOT NULL,
     notes VARCHAR(400),
     FOREIGN KEY (plant_id)
@@ -62,7 +64,7 @@ INSERT INTO plants_input_data (image_url,light_needs, water_needs, notes)
 
 DROP TABLE IF EXISTS individual_user;
 CREATE TABLE individual_user (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     firstname VARCHAR(20) NOT NULL,
     lastname VARCHAR(20) NOT NULL,
     email VARCHAR(30) NOT NULL,
@@ -72,7 +74,7 @@ CREATE TABLE individual_user (
 
 DROP TABLE IF EXISTS business_user;
 CREATE TABLE business_user (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     company_name VARCHAR(20) NOT NULL,
     website VARCHAR(20) NOT NULL,
     location VARCHAR(20) NOT NULL,
@@ -81,3 +83,5 @@ CREATE TABLE business_user (
     password VARCHAR(50) NOT NULL,
     FOREIGN KEY (plant_id)
     REFERENCES plants_api_data(id));
+
+    
