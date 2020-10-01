@@ -1,4 +1,5 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 class AboutUs extends React.Component {
 
@@ -6,9 +7,16 @@ class AboutUs extends React.Component {
 
     return (
       <div className="AboutUs">
-        <h1>We are homeplant lovers.</h1>
-        <h2>Have fun discovering plants that suit your needs and your environment, get recommendations from us, and start watering your plant today!</h2>
+        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+        We are homeplant lovers.
+        </Typography>
+
+        <Typography variant="h5"  align="center" color="textSecondary" gutterBottom>
+        Have fun discovering plants that suit your needs and your environment, get recommendations from us, and start watering your plant today!
+        </Typography>
+
         <img src="background.svg" alt="background" />
+
       </div>
     );
   }

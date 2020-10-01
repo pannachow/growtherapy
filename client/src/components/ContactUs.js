@@ -1,16 +1,20 @@
 import React from 'react';
+// import emailjs from 'emailjs-com';
 
 class ContactUs extends React.Component {
 
-  render() {
+    sendEmail(e) {
+        e.preventDefault();
 
-    return (
-      <div className="ContactUs">
-        <h2 style={{color: "#07f7df", fontStyle: "italic"}}>Send an email to us!</h2>
-      </div>
-    );
-  }
-
+        // emailjs.sendForm("service_xj11pov", "template_9y9kauc", e.target, "user_J3m42A7J6CyNZsMpU2kLo")
+    }
+    render() {
+        return (
+            <div>
+                <h2>Contact Us</h2>
+            </div>
+        )
+    }
 }
 
 export default ContactUs;

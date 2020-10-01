@@ -24,7 +24,7 @@ export default function Home() {
     <div>
       <div className={classes.heroContent}>
         <Container maxWidth="sm">
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
             THE PLANTS LOVER
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
@@ -40,7 +40,7 @@ export default function Home() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link color="secondary" component={RouterLink} to="/about-us">
+                <Link underline="none" color="secondary" component={RouterLink} to="/about-us">
                   <Button variant="outlined" color="secondary">
                     ABOUT US
                 </Button>
