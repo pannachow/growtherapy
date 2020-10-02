@@ -1,4 +1,4 @@
--- Drop tables if they exist
+ -- Drop tables if they exist
 
 DROP TABLE IF EXISTS plants_api_data;
 DROP TABLE IF EXISTS plants_input_data;
