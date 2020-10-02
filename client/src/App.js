@@ -1,9 +1,20 @@
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import './App.css';
-import Navigation from './components/Navigation';
 import Container from '@material-ui/core/Container';
-import { PlayCircleFilledWhite } from '@material-ui/icons';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import Navigation from './components/Navigation';
+import Home from "./components/Home";
+import AboutUs from "./components/AboutUs";
+import Plants from "./components/Plants";
+import FAQ from "./components/FAQ";
+import ContactUs from "./components/ContactUs";
+import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
+import './App.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -17,21 +28,46 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
-      <div className="App">
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <Router>
           <Navigation />
-          <br/>
-          <Container >
-            <img src="plants.svg" alt="indoor-plants" />
+          <br />
+          <Container>
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+
+              <Route path="/about-us" exact>
+                <AboutUs />
+              </Route>
+
+              <Route path="/plants" exact>
+                <Plants />
+              </Route>
+
+              <Route path="/FAQ" exact>
+                <FAQ />
+              </Route>
+
+              <Route path="/contact-us" exact>
+                <ContactUs />
+              </Route>
+
+              <Route path="/log-in" exact>
+                <LogIn />
+              </Route>
+
+              <Route path="/sign-up" exact>
+                <SignUp />
+              </Route>
+
+            </Switch>
           </Container>
-        </ThemeProvider>
-      </div>
+        </Router>
+      </ThemeProvider>
     );
   }
 }

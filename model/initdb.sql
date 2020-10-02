@@ -88,5 +88,3 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/89DEFAC3-BC39-4C58-8049-A6E29E22DFAA_1280x1920.jpg?v=1598322085',
     360933, 2, 1, 'When the tips of ponytail turn brown — just snip these off and adjust watering if necessary.');
 
-
-
