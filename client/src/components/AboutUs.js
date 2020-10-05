@@ -10,12 +10,16 @@ class AboutUs extends React.Component {
         <br/>
         <br/>
         <br/>
-        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
-        We are homeplant lovers.
+        <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
+        We are house plant lovers.
         </Typography>
 
-        <Typography variant="h5"  align="center" color="textSecondary">
-        Have fun discovering plants that suit your needs and your environment, get recommendations from us, and start watering your plant today!
+        <Typography variant="h6"  align="left" color="textSecondary">
+        Plant therapy – it might sound like a new fad, but in fact, the practice is ancient. Engaging with plants can have a relaxing, peaceful effect on many people. Have fun discovering plants that suit your needs and your environment, get recommendations from us, and start watering your plant today!
+        </Typography>
+        <br />
+        <Typography variant="h7" align="left" color="textSecondary">
+          WOW nice
         </Typography>
         <img src="background.svg" alt="background" />
 
