@@ -10,13 +10,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from "react-router-dom";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" style={{ color: "white" }} align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" >
+        GROWTHERAPY
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundImage: "url(plants_header.jpg)",
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   footer: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundImage: "url(plants_footer.jpg)",
     padding: theme.spacing(6),
   },
 }));
@@ -66,8 +67,8 @@ export default function Album() {
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          <Container>
+            <Typography component="h1" variant="h2" align="center" style={{ color: "white" }} gutterBottom>
               To love the beautiful homeplants
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
@@ -95,11 +96,15 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
-                      View
+
+                    <Link component={RouterLink} to="/plant-view">
+                      <Button size="small" color="primary">
+                        View
                     </Button>
+                    </Link>
+
                     <Button size="small" color="primary">
-                      Edit
+                      Add
                     </Button>
                   </CardActions>
                 </Card>
@@ -108,17 +113,13 @@ export default function Album() {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
+
       <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+        <Typography style={{ color: "white" }} variant="h6" align="center" gutterBottom>
+          Don't Forget to Water the Plants!
         </Typography>
         <Copyright />
       </footer>
-      {/* End footer */}
     </React.Fragment>
   );
 }

@@ -13,7 +13,8 @@ class FAQ extends React.Component {
 
     return (
       <div className="Plants">
-        <h2 style={{color: "#0ff707", fontStyle: "italic"}}>QUESTIONS?</h2>
+        <Typography variant="h5" color="Primary">QUESTIONS?</Typography>
+        <br/>
         <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}

@@ -28,7 +28,7 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit">
           GROWTHERAPY
         </Link>{' '}
         {new Date().getFullYear()}
@@ -39,7 +39,7 @@ function Copyright() {
   
   const useStyles = makeStyles((theme) => ({
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(5),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -62,10 +62,10 @@ function Copyright() {
     const classes = useStyles();
   
     return (
-      <Container component="main" maxWidth="xs">
+      <Container maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-          <Typography component="h1" variant="h5">
+          <Typography style={{color: "#454343"}} component="h4" variant="h4">
             Contact us
           </Typography>
           <form onSubmit={(e) => sendEmail(e)} className={classes.form} noValidate>
