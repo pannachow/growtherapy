@@ -27,9 +27,6 @@ export default function Home() {
           <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
             THE PLANTS LOVER
           </Typography>
-          <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            CHECK OUT OUR PLANTS
-          </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
               <Grid item>
