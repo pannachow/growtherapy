@@ -9,7 +9,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundImage: "url(home_header.jpg)",
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
@@ -23,12 +23,9 @@ export default function Home() {
   return (
     <div>
       <div className={classes.heroContent}>
-        <Container maxWidth="sm">
-          <Typography variant="h2" align="center" color="textPrimary" gutterBottom>
+        <Container >
+          <Typography style={{color: "white", fontWeight: "bold"}} variant="h2" align="center" gutterBottom>
             THE PLANTS LOVER
-          </Typography>
-          <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            CHECK OUT OUR PLANTS
           </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
@@ -39,13 +36,7 @@ export default function Home() {
                   </Button>
                 </Link>
               </Grid>
-              <Grid item>
-                <Link underline="none" color="secondary" component={RouterLink} to="/about-us">
-                  <Button variant="outlined" color="secondary">
-                    ABOUT US
-                </Button>
-                </Link>
-              </Grid>
+              
             </Grid>
           </div>
         </Container>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,15 +13,16 @@ import FAQ from "./components/FAQ";
 import ContactUs from "./components/ContactUs";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
+import PlantView from "./components/PlantView";
 import './App.css';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#b9f6ca',
+      main: '#008b8b',
     },
     secondary: {
-      main: '#006400',
+      main: '#fcfcfc',
     },
   },
 });
@@ -33,39 +33,40 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Router>
           <Navigation />
-          <br />
-          <Container>
-            <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
 
-              <Route path="/about-us" exact>
-                <AboutUs />
-              </Route>
+            <Route path="/about-us" exact>
+              <AboutUs />
+            </Route>
 
-              <Route path="/plants" exact>
-                <Plants />
-              </Route>
+            <Route path="/plants" exact>
+              <Plants />
+            </Route>
 
-              <Route path="/FAQ" exact>
-                <FAQ />
-              </Route>
+            <Route path="/FAQ" exact>
+              <FAQ />
+            </Route>
 
-              <Route path="/contact-us" exact>
-                <ContactUs />
-              </Route>
+            <Route path="/contact-us" exact>
+              <ContactUs />
+            </Route>
 
-              <Route path="/log-in" exact>
-                <LogIn />
-              </Route>
+            <Route path="/log-in" exact>
+              <LogIn />
+            </Route>
 
-              <Route path="/sign-up" exact>
-                <SignUp />
-              </Route>
+            <Route path="/sign-up" exact>
+              <SignUp />
+            </Route>
 
-            </Switch>
-          </Container>
+            <Route path="/plant-view" exact>
+              <PlantView />
+            </Route>
+
+          </Switch>
         </Router>
       </ThemeProvider>
     );

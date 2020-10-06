@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
+    "emailjs": "^3.3.0",
     "emailjs-com": "^2.6.3",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
@@ -20,6 +21,7 @@
     "mysql": "^2.18.1",
     "node": "^14.13.0",
     "node-fetch": "^2.6.1",
+    "nodemailer": "^6.4.13",
     "nodemon": "^2.0.4",
     "react-router-dom": "^5.2.0"
   }
