@@ -1,7 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,15 +19,16 @@ import ContactUs from "./components/ContactUs";
 import LoginView from "./components/LoginView";
 import ErrorView from './components/ErrorView';
 import SignUp from "./components/SignUp";
+import PlantView from "./components/PlantView";
 import './App.css';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#b9f6ca',
+      main: '#008b8b',
     },
     secondary: {
-      main: '#006400',
+      main: '#fcfcfc',
     },
   },
 });
@@ -63,41 +63,44 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Router>
           <Navigation />
-          <br />
-          <Container>
-            <Switch>
-              <Route path="/" exact>
-                <Home />
-              </Route>
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
 
-              <Route path="/about-us" exact>
-                <AboutUs />
-              </Route>
+            <Route path="/about-us" exact>
+              <AboutUs />
+            </Route>
 
-              <Route path="/plants" exact>
-                <Plants />
-              </Route>
+            <Route path="/plants" exact>
+              <Plants />
+            </Route>
 
-              <Route path="/FAQ" exact>
-                <FAQ />
-              </Route>
+            <Route path="/FAQ" exact>
+              <FAQ />
+            </Route>
 
-              <Route path="/contact-us" exact>
-                <ContactUs />
-              </Route>
+            <Route path="/contact-us" exact>
+              <ContactUs />
+            </Route>
 
-              <Route path="/login" exact>
+              <Route path="/log-in" exact>
                 <LoginView login={(e, p) => this.doLogin(e, p)} error={this.state.loginError} />
               </Route>
 
-              <Route path="/sign-up" exact>
-                <SignUp />
-              </Route>
+            <Route path="/sign-up" exact>
+              <SignUp />
+            </Route>
 
+            <Route path="/plant-view" exact>
+              <PlantView />
+            </Route>
+
+            <Route>
               <ErrorView code="404" text="Not Found" />
-
+            </Route>
             </Switch>
-          </Container>
+          {/* </Container> */}
         </Router>
       </ThemeProvider>
     );
