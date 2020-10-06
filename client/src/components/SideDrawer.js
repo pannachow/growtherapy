@@ -11,6 +11,9 @@ import LocalFloristOutlinedIcon from '@material-ui/icons/LocalFloristOutlined';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import BusinessCenterRoundedIcon from '@material-ui/icons/BusinessCenterRounded';
+import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   list: {
@@ -35,26 +38,41 @@ export default function SideDrawer(props) {
         onKeyDown={props.toggleDrawer(false)}
       >
         <List>
-          <ListItem button>
-            <ListItemIcon><HomeIcon /></ListItemIcon>
-            <ListItemText primary='Home' />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon><BusinessCenterRoundedIcon /></ListItemIcon>
-            <ListItemText primary='About Us' />
-          </ListItem>
+          <Link color="secondary" component={RouterLink} to="/">
+            <ListItem button>
+              <ListItemIcon><HomeIcon /></ListItemIcon>
+              <ListItemText primary='Home' />
+            </ListItem>
+          </Link>
+
+          <Link color="secondary" component={RouterLink} to="/about-us">
+            <ListItem button>
+              <ListItemIcon><BusinessCenterRoundedIcon /></ListItemIcon>
+              <ListItemText primary='About Us' />
+            </ListItem>
+          </Link>
+
+          <Link color="secondary" component={RouterLink} to="/plants">
           <ListItem button>
             <ListItemIcon><LocalFloristOutlinedIcon /></ListItemIcon>
             <ListItemText primary='Plants' />
           </ListItem>
+          </Link>
+
+          <Link color="secondary" component={RouterLink} to="/FAQ">
           <ListItem button>
             <ListItemIcon><ContactSupportIcon /></ListItemIcon>
-            <ListItemText primary='FAQs' />
+            <ListItemText primary='FAQ' />
           </ListItem>
+          </Link>
+
+          <Link color="secondary" component={RouterLink} to="/contact-us">
           <ListItem button>
             <ListItemIcon><ContactMailIcon /></ListItemIcon>
             <ListItemText primary='Contact Us' />
           </ListItem>
+          </Link>
+          
         </List>
       </div>
     </Drawer>
