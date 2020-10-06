@@ -3,6 +3,6 @@ img {
 }
 
 * {
-  /* font-family: "Lucida Console", Courier, monospace; */
   font-family: Stencil Std, fantasy !important;
+  font-weight: bold !important;
 }

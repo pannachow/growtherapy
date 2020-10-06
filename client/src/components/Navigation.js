@@ -82,7 +82,7 @@ export default function Navigation() {
                         <MenuIcon />
                     </IconButton>
                     <Link underline="none" component={RouterLink} to="/" className={classes.title}>
-                        <Typography variant="h6" color="secondary">
+                        <Typography variant="h5" color="secondary">
                             GROWTHERAPY
                         </Typography>
                     </Link>
