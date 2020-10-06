@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../model/helper');
+<<<<<<< HEAD
 const fetch = require('node-fetch');
+=======
+>>>>>>> Work on Authorization in Progress
 
 //Helper functions_________________________________________________
 

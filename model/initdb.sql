@@ -10,24 +10,29 @@ CREATE TABLE plant_data (
     notes VARCHAR(400)
     );
 
-DROP TABLE IF EXISTS individual_user;
-CREATE TABLE individual_user (
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    firstname VARCHAR(20) NOT NULL,
-    lastname VARCHAR(20) NOT NULL,
-    email VARCHAR(30) NOT NULL,
-    password VARCHAR(50) NOT NULL
-    );
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(200) NOT NULL
+);
 
-DROP TABLE IF EXISTS business_user;
-CREATE TABLE business_user (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+DROP TABLE IF EXISTS individual_users;
+CREATE TABLE individual_users (
+    user_id INT NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS business_users;
+CREATE TABLE business_users (
+    user_id INT NOT NULL,
     company_name VARCHAR(20) NOT NULL,
     website VARCHAR(20) NOT NULL,
     location VARCHAR(20) NOT NULL,
     phone VARCHAR(20) NOT NULL,
-    email VARCHAR(30) NOT NULL,
-    password VARCHAR(50) NOT NULL
+        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
     );
 
 DROP TABLE IF EXISTS individual_users_plants;
@@ -88,3 +93,19 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/89DEFAC3-BC39-4C58-8049-A6E29E22DFAA_1280x1920.jpg?v=1598322085',
     360933, 2, 1, 'When the tips of ponytail turn brown — just snip these off and adjust watering if necessary.');
 
+INSERT INTO users (email, password)
+    VALUES
+    ('joe@acme.com', 'pass1'),
+    ('mary@gmail.com', 'pass2'),
+    ('plant@care.com', 'pass3'),
+    ('house@plants.com', 'pass4');
+
+INSERT INTO individual_users (user_id, first_name, last_name)
+    VALUES
+    (1, 'Joe', 'Smith'),
+    (2, 'Mary', 'Hernandez');
+
+INSERT INTO business_users (user_id, company_name, website, location, phone)
+    VALUES
+    (3, 'Plant Care', 'www.plantcare.com', 'Brooklyn, NY', '718-387-2382'),
+    (4, 'House Plants', 'www.houseplants.com', 'Flower Hill, NY', '718-317-2262')
