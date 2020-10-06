@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(./fruit.svg)',
+    backgroundImage: 'url(./log-in.svg)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -58,8 +58,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+export default function SignInSide(props) {
   const classes = useStyles();
+
+  function login(e) {
+    e.preventDefault();
+    props.login('panna', '');
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -106,6 +111,7 @@ export default function SignInSide() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={login}
             >
               Log In
             </Button>

@@ -29,7 +29,6 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -49,8 +48,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const background = {
+    position: 'absolute',
+    top: 0,
+    width: '85%',
+    zIndex: -1,
+  };
 
   return (
+    <>
+    <br/>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -138,5 +145,7 @@ export default function SignUp() {
         <Copyright />
       </Box>
     </Container>
+    <img src="sign-up.svg" alt="flower background" style={background} />
+    </>
   );
 }
