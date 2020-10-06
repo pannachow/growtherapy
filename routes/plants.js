@@ -1,10 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../model/helper');
-<<<<<<< HEAD
 const fetch = require('node-fetch');
-=======
->>>>>>> Work on Authorization in Progress
 
 //Helper functions_________________________________________________
 
@@ -35,7 +32,6 @@ router.get('/search', async function(req, res, next) {
 });
 
 
-
 router.get('/', function(req, res, next) {
   db('SELECT * FROM plant_data;')
   .then(results => {
@@ -43,6 +39,24 @@ router.get('/', function(req, res, next) {
   })
   .catch(err => 
     res.status(500).send(err));
+});
+
+router.get('/:id', async function(req, res, next) {
+  let { id } = req.params;
+
+  try {
+    if ( plantExist(id) === false ) {
+      res.status(404).send( {error: 'Not found'} );
+      return;
+    }
+    let sql = (`SELECT * FROM plant_data WHERE id = ${id}`);
+    let results = await db(sql);
+    res.send(results.data[0]);
+
+  } catch (err) {
+    res.status(500).send( {error: err} );
+  }
+  
 });
 
 router.get('/:id', async function(req, res, next) {
