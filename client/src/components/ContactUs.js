@@ -57,7 +57,7 @@ function Copyright() {
     },
   }));
   
-  export default function SignUp() {
+  export default function ContactUs() {
       
     const classes = useStyles();
   
