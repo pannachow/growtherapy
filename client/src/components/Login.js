@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { withRouter } from "react-router";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -58,12 +59,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide(props) {
+function Login(props) {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   function login(e) {
     e.preventDefault();
-    props.login('panna', '');
+    props.login(email, password);
+    props.history.push('/');
   }
 
   return (
@@ -78,6 +82,12 @@ export default function SignInSide(props) {
           <Typography component="h1" variant="h5">
             Log in
           </Typography>
+          {/* Login error message displayed here */}
+          {
+            props.error && (
+              <div>{props.error}</div>
+            )
+          }
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -88,6 +98,8 @@ export default function SignInSide(props) {
               label="Email Address"
               name="email"
               autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.value)}
               autoFocus
             />
             <TextField
@@ -100,6 +112,8 @@ export default function SignInSide(props) {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -117,7 +131,7 @@ export default function SignInSide(props) {
             </Button>
             <Grid container>
               <Grid item>
-              <Link color="secondary" underline="none" component={RouterLink} to="/sign-up">
+                <Link color="secondary" underline="none" component={RouterLink} to="/sign-up">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
@@ -131,3 +145,5 @@ export default function SignInSide(props) {
     </Grid>
   );
 }
+
+export default withRouter(Login);

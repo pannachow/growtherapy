@@ -37,35 +37,35 @@ export default function SideDrawer(props) {
         onKeyDown={props.toggleDrawer(false)}
       >
         <List>
-          <Link color="primary" component={RouterLink} to="/">
+          <Link color="primary" underline="none" component={RouterLink} to="/">
             <ListItem button>
               <ListItemIcon><HomeIcon /></ListItemIcon>
               <ListItemText primary='Home' />
             </ListItem>
           </Link>
 
-          <Link color="primary" component={RouterLink} to="/about-us">
+          <Link color="primary" underline="none" component={RouterLink} to="/about-us">
             <ListItem button>
               <ListItemIcon><BusinessCenterRoundedIcon /></ListItemIcon>
               <ListItemText primary='About Us' />
             </ListItem>
           </Link>
 
-          <Link color="primary" component={RouterLink} to="/plants">
+          <Link color="primary" underline="none" component={RouterLink} to="/plants">
           <ListItem button>
             <ListItemIcon><LocalFloristOutlinedIcon /></ListItemIcon>
             <ListItemText primary='Plants' />
           </ListItem>
           </Link>
 
-          <Link color="primary" component={RouterLink} to="/FAQ">
+          <Link color="primary" underline="none" component={RouterLink} to="/FAQ">
           <ListItem button>
             <ListItemIcon><ContactSupportIcon /></ListItemIcon>
             <ListItemText primary='FAQ' />
           </ListItem>
           </Link>
 
-          <Link color="primary" component={RouterLink} to="/contact-us">
+          <Link color="primary" underline="none" component={RouterLink} to="/contact-us">
           <ListItem button>
             <ListItemIcon><ContactMailIcon /></ListItemIcon>
             <ListItemText primary='Contact Us' />

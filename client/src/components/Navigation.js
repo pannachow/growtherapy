@@ -1,8 +1,8 @@
 import React from 'react';
+import { withRouter } from "react-router";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import Button from '@material-ui/core/Button';
@@ -12,6 +12,7 @@ import SideDrawer from './SideDrawer';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navigation(props) {
+function Navigation(props) {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -74,11 +75,15 @@ export default function Navigation(props) {
     setState({ ...state, open: open });
   };
 
+  function logout() {
+    props.doLogout();
+    props.history.push('/');
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-
           <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
@@ -97,12 +102,14 @@ export default function Navigation(props) {
             }}
             inputProps={{ 'aria-label': 'search' }}
           />
-          {props.user ? (
+          {props.userId ? (
             <>
+              <Link underline="none" component={RouterLink} to="/secret">Secret</Link>
+              <Link underline="none" component={RouterLink} to={`/users/${props.userId}/profile`}>Profile</Link>
               <Avatar src="/broken-image.jpg" />
-              {props.user.username}
+              {props.userId}
               <Link underline="none" component={RouterLink} to="/">
-                <Button style={{ color: "#97CD80", fontWeight: "bold" }} >LOGOUT</Button>
+                <Button style={{ color: "#97CD80", fontWeight: "bold" }} onClick={logout}>LOGOUT</Button>
               </Link>
             </>
           ) : (
@@ -122,3 +129,5 @@ export default function Navigation(props) {
     </div>
   );
 }
+
+export default withRouter(Navigation);
