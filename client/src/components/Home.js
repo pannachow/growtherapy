@@ -41,7 +41,7 @@ export default function Home() {
           </div>
         </Container>
       </div>
-      <img src="plants.svg" alt="plants" />
+      <img src="home.svg" alt="plants" />
     </div>
   );
 }

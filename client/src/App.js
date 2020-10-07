@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
@@ -13,14 +12,13 @@ import Api from './helpers/Api';
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
 
-
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Plants from "./components/Plants";
 import FAQ from "./components/FAQ";
 import ContactUs from "./components/ContactUs";
 
-import LoginView from "./components/LoginView";
+import Login from "./components/Login";
 import SecretView from './components/SecretView';
 import ProfileView from './components/ProfileView';
 import ErrorView from './components/ErrorView';
@@ -31,10 +29,10 @@ import './App.css';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#008b8b',
+      main: '#013F2B',
     },
     secondary: {
-      main: '#fcfcfc',
+      main: '#009572',
     },
   },
 });
@@ -49,12 +47,12 @@ class App extends React.Component {
   }
 
   async doLogin(email, password) {
-    let body = { email, password };
-    let response = Api.request('POST', '/users/login', body);
+    const body = { email, password };
+    const response = await Api.request('POST', '/users/login', body);
     if (response.ok) {
       Auth.loginUser(response.data.token, response.data.userId);
       this.setState({ userId: response.data.userId, loginError: '' });
-      this.props.history.push('/');
+      // this.props.history.push('/');
     } else {
       this.setState({ loginError: response.error });
     }
@@ -63,7 +61,7 @@ class App extends React.Component {
   doLogout() {
     Auth.logoutUser();
     this.setState({ userId: '' });
-    this.props.history.push('/');
+    // this.props.history.push('/');
   }
 
   render() {
@@ -92,38 +90,37 @@ class App extends React.Component {
               <ContactUs />
             </Route>
 
-              <Route path="/log-in" exact>
-                <LoginView 
-                    login={(e, p) => this.doLogin(e, p)} 
-                    error={this.state.loginError} />
-              </Route>
+            <Route path="/log-in" exact>
+              <Login
+                login={(e, p) => this.doLogin(e, p)}
+                error={this.state.loginError} />
+            </Route>
 
             <Route path="/sign-up" exact>
               <SignUp />
             </Route>
 
             <PrivateRoute
-                path="/users/:userId/profile"
-                exact
-                component={ProfileView}
+              path="/users/:userId/profile"
+              exact
+              component={ProfileView}
             />
-            
+
             <PrivateRoute path="/secret" exact>
-                <SecretView />
+              <SecretView />
             </PrivateRoute>
 
             <Route path="/plant-view" exact>
               <PlantView />
             </Route>
 
-              <ErrorView code="404" text="Not Found" />
+            <ErrorView code="404" text="Not Found" />
 
-            </Switch>
-          {/* </Container> */}
+          </Switch>
         </Router>
       </ThemeProvider>
     );
   }
 }
 
-export default withRouter(App);
+export default App;
