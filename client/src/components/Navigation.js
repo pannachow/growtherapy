@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SideDrawer from './SideDrawer';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navigation() {
+export default function Navigation(props) {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -82,11 +83,10 @@ export default function Navigation() {
             <MenuIcon />
           </IconButton>
           <Link underline="none" component={RouterLink} to="/" className={classes.title}>
-            <Typography variant="h5" color="secondary">
+            <Typography variant="h5" style={{ color: "white", fontWeight: "bold" }} >
               GROWTHERAPY
-                        </Typography>
+            </Typography>
           </Link>
-
 
           <SearchIcon />
           <InputBase
@@ -97,14 +97,25 @@ export default function Navigation() {
             }}
             inputProps={{ 'aria-label': 'search' }}
           />
-          <Link underline="none" component={RouterLink} to="/log-in">
-            <Button>LOGIN</Button>
-          </Link>
+          {props.user ? (
+            <>
+              <Avatar src="/broken-image.jpg" />
+              {props.user.username}
+              <Link underline="none" component={RouterLink} to="/">
+                <Button style={{ color: "#97CD80", fontWeight: "bold" }} >LOGOUT</Button>
+              </Link>
+            </>
+          ) : (
+              <>
+                <Link underline="none" component={RouterLink} to="/log-in">
+                  <Button style={{ color: "#97CD80", fontWeight: "bold" }} >LOGIN</Button>
+                </Link>
 
-          <Link underline="none" component={RouterLink} to="/sign-up">
-            <Button>SIGN UP</Button>
-          </Link>
-
+                <Link underline="none" component={RouterLink} to="/sign-up">
+                  <Button style={{ color: "#009472", fontWeight: "bold" }} >SIGN UP</Button>
+                </Link>
+              </>
+            )}
         </Toolbar>
       </AppBar>
       <SideDrawer open={state.open} toggleDrawer={toggleDrawer} />

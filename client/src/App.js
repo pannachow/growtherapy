@@ -19,20 +19,37 @@ import './App.css';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#008b8b',
+      main: '#013F2B',
     },
     secondary: {
-      main: '#fcfcfc',
+      main: '#009572',
     },
   },
 });
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null
+    };
+  }
+
+  login(username, password) {
+    this.setState({
+      user: {
+        username: username
+      }
+    })
+  }
+
   render() {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          <Navigation />
+          <Navigation
+            user={this.state.user}
+           />
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -55,7 +72,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/log-in" exact>
-              <LogIn />
+              <LogIn login={this.login.bind(this)}/>
             </Route>
 
             <Route path="/sign-up" exact>
