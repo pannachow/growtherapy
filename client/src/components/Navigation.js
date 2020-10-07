@@ -13,101 +13,101 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
 
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
     },
-    searchIcon: {
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(${theme.spacing(2)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
     },
-    inputRoot: {
-        color: 'inherit',
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(${theme.spacing(2)}px)`,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
+  },
 }));
 
 export default function Navigation() {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const [state, setState] = React.useState({
-        open: false,
-    });
+  const [state, setState] = React.useState({
+    open: false,
+  });
 
-    const toggleDrawer = (open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setState({ ...state, open: open });
-    };
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setState({ ...state, open: open });
+  };
 
-    return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Toolbar>
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
 
-                    <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <MenuIcon />
-                    </IconButton>
-                    <Link underline="none" component={RouterLink} to="/" className={classes.title}>
-                        <Typography variant="h5" color="secondary">
-                            GROWTHERAPY
+          <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Link underline="none" component={RouterLink} to="/" className={classes.title}>
+            <Typography variant="h5" color="secondary">
+              GROWTHERAPY
                         </Typography>
-                    </Link>
+          </Link>
 
 
-                    <SearchIcon />
-                    <InputBase
-                        placeholder="Search…"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{ 'aria-label': 'search' }}
-                    />
-                    <Link underline="none" component={RouterLink} to="/log-in">
-                        <Button>LOGIN</Button>
-                    </Link>
+          <SearchIcon />
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+          />
+          <Link underline="none" component={RouterLink} to="/log-in">
+            <Button>LOGIN</Button>
+          </Link>
 
-                    <Link underline="none" component={RouterLink} to="/sign-up">
-                        <Button>SIGN UP</Button>
-                    </Link>
+          <Link underline="none" component={RouterLink} to="/sign-up">
+            <Button>SIGN UP</Button>
+          </Link>
 
-                </Toolbar>
-            </AppBar>
-            <SideDrawer open={state.open} toggleDrawer={toggleDrawer} />
-        </div>
-    );
+        </Toolbar>
+      </AppBar>
+      <SideDrawer open={state.open} toggleDrawer={toggleDrawer} />
+    </div>
+  );
 }

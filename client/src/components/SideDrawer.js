@@ -14,7 +14,6 @@ import BusinessCenterRoundedIcon from '@material-ui/icons/BusinessCenterRounded'
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 
-
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -72,7 +71,6 @@ export default function SideDrawer(props) {
             <ListItemText primary='Contact Us' />
           </ListItem>
           </Link>
-          
         </List>
       </div>
     </Drawer>
