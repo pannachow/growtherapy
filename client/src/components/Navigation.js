@@ -97,9 +97,36 @@ export default function Navigation() {
                         }}
                         inputProps={{ 'aria-label': 'search' }}
                     />
-                    <Link underline="none" component={RouterLink} to="/log-in">
-                        <Button>LOGIN</Button>
-                    </Link>
+
+                    {
+                        props.userId && ( 
+                            <>
+                                
+                                <Link underline="none" component={RouterLink} to="/secret">Secret</Link>
+                                <Link underline="none" component={RouterLink} to={`/users/${props.userId}/profile`}>Profile</Link>
+                            </>
+                        )
+                    }
+
+                    {
+                        props.userId
+                            ?
+                                (
+                                    <ul>
+                                        <li>
+                                        <span
+                                        onClick={(e) => props.doLogout()}
+                                        >Log out</span>
+                                        </li>
+                                    </ul>
+                                )
+                            :
+                                (
+                                    <Link underline="none" component={RouterLink} to="/log-in">
+                                        <Button>LOGIN</Button>
+                                    </Link>
+                                )
+                    }
 
                     <Link underline="none" component={RouterLink} to="/sign-up">
                         <Button>SIGN UP</Button>
