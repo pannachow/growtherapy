@@ -22,19 +22,19 @@ class LoginView extends React.Component {
 
     render() {
         return (
-            <div className="LoginView row">
-                <div className="col-4 offset-4">
+            <div>
+                <div>
                     <h2>Login</h2>
                     
                     {/* Login error message displayed here */}
                     {
                         this.props.error && (
-                            <div className="alert alert-danger">{this.props.error}</div>
+                            <div>{this.props.error}</div>
                         )
                     }
 
                     <form onSubmit={(e) => this.handleSubmit(e)}>
-                        <div className="form-group">
+                        <div>
                             <label>Email
                                 <input
                                     type="text"
@@ -47,7 +47,7 @@ class LoginView extends React.Component {
                             </label>
                         </div>
     
-                        <div className="form-group">
+                        <div>
                             <label>Password
                                 <input
                                     type="password"
@@ -60,7 +60,7 @@ class LoginView extends React.Component {
                             </label>
                         </div>
     
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit">Submit</button>
                     </form>
                 </div>
             </div>
