@@ -7,7 +7,7 @@ const { ensureUserLoggedIn } = require('../middleware/guards');
 router.use(bodyParser.json());
 
 /* GET home page. */
-router.get('/growtherapy', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.send({ message: 'Welcome to Growtherapy' });
 });
 

@@ -3,6 +3,7 @@ var router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
+const { ensureSameUser } = require('../middleware/guards');
 const db = require("../model/helper");
 
 /**
@@ -33,7 +34,7 @@ router.post('/login', async (req, res, next) => {
   let { email, password } = req.body;
 
   try {
-      let results = await db(`SELECT * FROM users WHERE username = '${username}'`);
+      let results = await db(`SELECT * FROM users WHERE email = '${email }'`);
       if (results.data.length === 0) {
           // Email not found
           res.status(400).send({ error: 'Login failed' });
@@ -63,7 +64,7 @@ router.post('/login', async (req, res, next) => {
 * Get all users
 **/
 
-router.get('/users', function(req, res, next) {
+router.get('/users', async function(req, res, next) {
   let sql = 'SELECT email FROM users ORDER BY email';
   try {
       let results = await db(sql);
