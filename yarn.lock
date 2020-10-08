@@ -423,6 +423,11 @@ emailjs-com@^2.6.3:
   resolved "https://registry.yarnpkg.com/emailjs-com/-/emailjs-com-2.6.3.tgz#881269588aac453a6f44a84b814922d52b8ec202"
   integrity sha512-hucvmelA6wUN1W7Lnw3yKXTWq3lNyVOBN306WcODPcfazuGWTot9/7aaiHQESBo9VrG1JgSk7La6fckq3eLvUg==
 
+emailjs@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/emailjs/-/emailjs-3.3.0.tgz#d6cef5a984fe0ef20bb95c18f0fda3d51c1ca286"
+  integrity sha512-O8fUbXhyzZEokeLq+mrefYaSdToLXlW3oQfCU+75kqkwL27W8Cb6PW/ipjF1ePapLNoAvWPvwInh/x7x4z/jKA==
+
 emoji-regex@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-7.0.3.tgz#933a04052860c85e83c122479c4748a8e4c72156"
@@ -1105,6 +1110,11 @@ node@^14.13.0:
   integrity sha512-VVHE0LcRtoDHh0cunHu/YJvTYUFZMna8sD+fUG0XZ5myNzLuQHQdPt/32er4A/EtED5EO5519Ll29o3GFmmssQ==
   dependencies:
     node-bin-setup "^1.0.0"
+
+nodemailer@^6.4.13:
+  version "6.4.13"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.13.tgz#40e67cf5a32f2052258822a9394e190ea9714801"
+  integrity sha512-XmtiiKza2Cqtr+ZRMchMZn9s2nmwQDeakbf+yL0ODsIXOv58UZgk/MKPOkDKqY+mvxHs87PrJK7Nf/tcpKHqYQ==
 
 nodemon@^2.0.4:
   version "2.0.4"

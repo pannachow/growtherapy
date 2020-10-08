@@ -50,7 +50,7 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     VALUES 
     -- Sansevieria trifasciata
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_snake_plant_1150x1150.jpg?v=1554229767',
-    1220287, 1, 2, 'Allow soil to completely dry out in between waterings – this plant is prone to rot if overwatered.'),
+    1258091, 1, 2, 'Allow soil to completely dry out in between waterings – this plant is prone to rot if overwatered.'),
 
     -- ZZ
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_zz_plant_1150x1150.jpg?v=1554229986',
@@ -64,7 +64,7 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_xerographica_product_4fc85c5a-1a67-4b00-8cf1-ff704988cae5_2632x2632.jpg?v=1554910730',
     292693, 2, 3, 'No soil needed. To water, fully submerge in room temperature water approximately once a week for 20-30 minutes. To dry, lay upside down on a towel to to rid of excess water'),
 
-    -- Alocasia Polly
+    -- Alocasia Polly/ Kris' Plant
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/image_6_499x748.png?v=1593461332',
     344495, 2, 3, 'Allow soil to dry out on the top 2” - 3” before fully saturating with water'),
 
@@ -78,7 +78,7 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
 
     -- Aloe Vera
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/3e8077490855372b69b03077f914441a_1188x1856.jpg?v=1595340563',
-    1159475, 3, 2, 'Water thoroughly when soil is completely dry'),
+    103926, 3, 2, 'Water thoroughly when soil is completely dry'),
 
     -- Prayer Plant
     ('https://bloomscape.com/wp-content/uploads/2019/11/bloomscape-product-detail_red-prayer-plant-scaled.jpg?ver=94596',
