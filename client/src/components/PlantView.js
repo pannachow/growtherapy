@@ -8,7 +8,13 @@ const plantData = {
   sun: "Your fern prefers bright indirect light. Find a south-facing window or the brightest alternative.",
   water: "Regular weekly watering is encouraged, and avoid drought conditions. Keep the soil moist but not soggy.",
   tips: "Bring your fern off the floor or table by using a plant stand or a plant hanger, or by placing it on a tall surface, to encourage the sprawling, trailing foliage to flourish.",
-  waterInterval: 1,
+  wateringInterval: 3,
+};
+
+const wateringSchedule = {
+  start: new Date(),
+  interval: plantData.wateringInterval,
+  text: "Time to water this bad boy",
 };
 
 export default class PlantView extends React.Component {
@@ -24,36 +30,36 @@ export default class PlantView extends React.Component {
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", columnGap: "5px" }}>
 
-              <Typography color="primary" variant="p">
+              <Typography color="primary" variant="body1">
                 Name:
               </Typography>
-              <Typography color="secondary" variant="p">
+              <Typography color="secondary" variant="body1">
                 {plantData.name}
               </Typography>
 
-              <Typography color="primary" variant="p">
-                Sun: 
+              <Typography color="primary" variant="body1">
+                Sun:
               </Typography>
-              <Typography color="secondary" variant="p">
+              <Typography color="secondary" variant="body1">
                 {plantData.sun}
               </Typography>
 
-              <Typography color="primary" variant="p">
-                Water: 
+              <Typography color="primary" variant="body1">
+                Water:
               </Typography>
-              <Typography color="secondary" variant="p">
+              <Typography color="secondary" variant="body1">
                 {plantData.water}
               </Typography>
 
-              <Typography color="primary" variant="p">
-                Tips: 
+              <Typography color="primary" variant="body1">
+                Tips:
               </Typography>
-              <Typography color="secondary" variant="p">
+              <Typography color="secondary" variant="body1">
                 {plantData.tips}
               </Typography>
             </div>
 
-            <Calendar />
+            <Calendar schedule={wateringSchedule} />
           </div>
         </div>
 
