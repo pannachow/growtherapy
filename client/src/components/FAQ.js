@@ -15,7 +15,7 @@ class FAQ extends React.Component {
     return (
       <Container>
         <br />
-        <Typography variant="h5" color="Primary">QUESTIONS?</Typography>
+        <Typography variant="h5" color="secondary">QUESTIONS?</Typography>
         <br />
         <Accordion>
           <AccordionSummary
@@ -30,8 +30,8 @@ class FAQ extends React.Component {
               Plants are an easy way to add color, energy and transform your space,
               but which plant is for you? Choosing the right plant will depend on your style preference,
               the size of your space and your
-          <Link href="https://www.thesill.com/blogs/plants-101/eligible-environments" target="_blank"> home or office environment</Link>. What kind of plants do you like?
-          From these, decide how much space you can accommodate, then do a little <Link href="https://www.thesill.com/blogs/plants-101/top-ten-plant-care-tips" target="_blank"> digging </Link> to see if these
+          <Link color="secondary" href="https://www.thesill.com/blogs/plants-101/eligible-environments" target="_blank"> home or office environment</Link>. What kind of plants do you like?
+          From these, decide how much space you can accommodate, then do a little <Link color="secondary" href="https://www.thesill.com/blogs/plants-101/top-ten-plant-care-tips" target="_blank"> digging </Link> to see if these
           plants are suited to thrive in their new home based on their care requirements.
           </Typography>
           </AccordionDetails>
@@ -52,12 +52,12 @@ class FAQ extends React.Component {
               light away from windows, but as a rule, no plant should ever be more than 6 feet from a window.
           <br />
               <br />
-          If you brought your new plant home in a grow pot, we suggest <Link href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-repotting" target="_blank"> repotting</Link> it within a week or two.
+          If you brought your new plant home in a grow pot, we suggest <Link color="secondary" href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-repotting" target="_blank"> repotting</Link> it within a week or two.
           Most plants are often sold in nursery pots or plastic containers which may not exactly fit the decor vibes of your space.
           They may also be too small for your plant. To repot, choose a pot 1-3 inches larger than the original container.
-          The color, style and fabrication is totally up to you. Add a pop of color with a red clay pot, or keep it light and airy with <Link href="https://www.thesill.com/collections/pots" target="_blank"> white ceramic</Link>.
+          The color, style and fabrication is totally up to you. Add a pop of color with a red clay pot, or keep it light and airy with <Link color="secondary" href="https://www.thesill.com/collections/pots" target="_blank"> white ceramic</Link>.
           Ideally, your pot will have drainage (that hole at the bottom). If not, line the bottom of the pot with lava rocks, about 1 inch deep.
-          Once your plant is in its new pot, <Link href="https://www.thesill.com/blogs/the-basics/drink-up" target="_blank"> water</Link> the soil for a nice uniform consistency and let the soil dry out completely before the next watering.
+          Once your plant is in its new pot, <Link color="secondary" href="https://www.thesill.com/blogs/the-basics/drink-up" target="_blank"> water</Link> the soil for a nice uniform consistency and let the soil dry out completely before the next watering.
           </Typography>
           </AccordionDetails>
         </Accordion>
@@ -75,7 +75,7 @@ class FAQ extends React.Component {
               In order to make a plant happy, try your best to recreate its natural environment. For example, succulents
               and cacti are desert plants. They enjoy being in direct sunlight for as much of the day as possible.
               Ferns are from misty forests, so they need the high humidity that, say, a bathroom (with a window) brings.
-          It may seem kind of obvious, but not dying is a good thing. If the plant is getting enough light — <Link href="https://www.thesill.com/blogs/plants-101/lighten-up" target="_blank">light is
+          It may seem kind of obvious, but not dying is a good thing. If the plant is getting enough light — <Link color="secondary" href="https://www.thesill.com/blogs/plants-101/lighten-up" target="_blank">light is
           food for plants</Link>  — then it will grow. Don’t be alarmed if a plant doesn’t grow or do much. It may be in a dormancy phase.
           </Typography>
           </AccordionDetails>
@@ -136,10 +136,10 @@ class FAQ extends React.Component {
           <AccordionDetails>
             <Typography>
               In a year or two — if your plant has not overgrown its current planter — you can simply change
-        the potting mix out to provide it with new nutrients. Learn more about potting mixes <Link href="https://www.thesill.com/blogs/care-miscellaneous/potting-mix-101" target="_blank"> here</Link>.
+        the potting mix out to provide it with new nutrients. Learn more about potting mixes <Link color="secondary" href="https://www.thesill.com/blogs/care-miscellaneous/potting-mix-101" target="_blank"> here</Link>.
         <br />
               <br />
-        Small doses of nutrient-rich <Link href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-fertilizer" target="_blank"> fertilizer</Link> may also be enough to get your potting mix back in tip top shape.
+        Small doses of nutrient-rich <Link color="secondary" href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-fertilizer" target="_blank"> fertilizer</Link> may also be enough to get your potting mix back in tip top shape.
 
           </Typography>
           </AccordionDetails>
@@ -173,7 +173,7 @@ class FAQ extends React.Component {
               We recommend following the instructions on the packaging of whatever fertilize you choose.
               Many are added to liquids and used in your watering can while watering. All fertilizers,
               whether liquid, dissolvable, or granular are applied to the potting mix (not the plant
-            itself/the plant's leaves). Learn more about fertilizer <Link href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-fertilizer" target="_blank"> here</Link>.
+            itself/the plant's leaves). Learn more about fertilizer <Link color="secondary" href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-fertilizer" target="_blank"> here</Link>.
           </Typography>
           </AccordionDetails>
         </Accordion>
@@ -199,7 +199,7 @@ class FAQ extends React.Component {
               if your plants require lots of light, opt for a bulb or bulbs which total 3000 lumens or more.
           <br />
               <br />
-          Learn more about the importance of light for plants <Link href="https://www.thesill.com/blogs/plants-101/lighten-up" target
+          Learn more about the importance of light for plants <Link color="secondary" href="https://www.thesill.com/blogs/plants-101/lighten-up" target
                 ="_blank"> here</Link>.
           </Typography>
           </AccordionDetails>
@@ -227,7 +227,7 @@ class FAQ extends React.Component {
           and feel it. Is the mix too wet or super dry? Generally, if there’s a watering problem,
           most leaves on the plant will be affected. If it’s too hot or too cold, well, plants want to
           be where you want to be (70 and sunny, anyone?). So, if you put your head where the plant is,
-          and it’s too drafty, cold, or hot, then try to move it to another spot with less <Link href="https://www.thesill.com/blogs/the-basics/eligible-environments" target="_blank"> environmental changes</Link>.
+          and it’s too drafty, cold, or hot, then try to move it to another spot with less <Link color="secondary" href="https://www.thesill.com/blogs/the-basics/eligible-environments" target="_blank"> environmental changes</Link>.
           Remember, yellow leaves never occur without other symptoms unless they are old leaves. It’s identifying
           those other symptoms that will help you get to the root of the problem.
           </Typography>
@@ -247,11 +247,11 @@ class FAQ extends React.Component {
               Leaves usually drop for one of two reasons: (1) either the roots cannot support them,
               or (2) there is not enough light. In the first case, the plant is pot-bound. Plants can be
               just as big below ground as they are above ground, so they will drop leaves if the roots cannot grow.
-          In this case, you'll want to <Link href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-repotting" target="_blank"> repot your plant</Link> into a bigger planter with more room for the roots.
+          In this case, you'll want to <Link color="secondary" href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-repotting" target="_blank"> repot your plant</Link> into a bigger planter with more room for the roots.
           <br />
               <br />
           In the second case, light is food for plants, so the plant literally isn't getting enough food
-          to support the leaves, so it drops them. Help your plant by providing <Link href="https://www.thesill.com/blogs/plants-101/lighten-up" target="_blank"> more sunlight</Link> or doing a little pruning.
+          to support the leaves, so it drops them. Help your plant by providing <Link color="secondary" href="https://www.thesill.com/blogs/plants-101/lighten-up" target="_blank"> more sunlight</Link> or doing a little pruning.
           </Typography>
           </AccordionDetails>
         </Accordion>
@@ -269,12 +269,12 @@ class FAQ extends React.Component {
               If your plant is leaning, access how much your plant is leaning (a little or a lot?)
               A little lean is totally normal because, gravity. Also, if it’s a vining plant like a monstera,
               then leaning is totally normal. Extreme lean, not so much. Both can be corrected with the right
-          amount of <Link href="https://www.thesill.com/blogs/plants-101/lighten-up" target="_blank"> sunlight</Link> and rotation. Remember, plants grow towards sunlight. To fix a slight lean,
+          amount of <Link color="secondary" href="https://www.thesill.com/blogs/plants-101/lighten-up" target="_blank"> sunlight</Link> and rotation. Remember, plants grow towards sunlight. To fix a slight lean,
           try rotating your plant every few weeks. If your plant is leaning a lot and you notice new growth
           to be smaller, pale and spindly, it needs even more sunlight. Try moving your plant closer to the
           light source and rotate every time you water. If your lean becomes extreme, it could be a deeper-rooted
           problem: root rot, improper potting and outgrowing the pot are common causes. In these cases, your
-          plant needs to be <Link href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-repotting" target="_blank"> repotted</Link>.
+          plant needs to be <Link color="secondary" href="https://www.thesill.com/blogs/care-miscellaneous/plant-care-repotting" target="_blank"> repotted</Link>.
           </Typography>
           </AccordionDetails>
         </Accordion>
@@ -296,7 +296,7 @@ class FAQ extends React.Component {
           </AccordionDetails>
         </Accordion>
         <br />
-        <Link underline="none" component={RouterLink} to="/contact-us">
+        <Link color="secondary" underline="none" component={RouterLink} to="/contact-us">
           {"Didn't find an answer? Contact us"}
         </Link>
       </Container>
