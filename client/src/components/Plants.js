@@ -11,6 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 
 function Copyright() {
   return (
@@ -55,6 +57,31 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: "url(plants_footer.jpg)",
     padding: theme.spacing(6),
   },
+  search: {
+    position: 'center',
+    borderRadius: theme.shape.borderRadius,
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(${theme.spacing(1)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -67,6 +94,7 @@ export default function Album() {
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
+
           <Container>
             <Typography component="h1" variant="h2" align="center" style={{ color: "white" }} gutterBottom>
               To love the beautiful homeplants
@@ -74,10 +102,21 @@ export default function Album() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Find plants and learn to care. Plants for beginners and more!
             </Typography>
+            <div style={{textAlign: "center"}}>
+              <SearchIcon />
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
           </Container>
+
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
           <Grid container spacing={4}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
