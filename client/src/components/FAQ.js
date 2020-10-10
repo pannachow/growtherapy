@@ -8,10 +8,9 @@ import { Link } from '@material-ui/core';
 import { Link as RouterLink } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 
+
 class FAQ extends React.Component {
-
   render() {
-
     return (
       <Container>
         <br />

@@ -58,8 +58,10 @@ const useStyles = makeStyles((theme) => ({
 
 const background = {
   position: 'absolute',
-  top: 0,
-  width: '45%',
+  top: 40,
+  marginRight: 'auto',
+  marginLeft: 'auto',
+  width: '100%',
   height: '100%',
   zIndex: -1,
 };
@@ -70,8 +72,10 @@ export default function ContactUs() {
 
   return (
     <>
-    <img src="contact-us.svg" alt="background" style={background} />
+    <img src="contact-us.jpg" alt="background" style={background} />
+
     <Container maxWidth="xs">
+
       <CssBaseline />
       <div className={classes.paper}>
         <Typography color="primary" component="h4" variant="h4">
