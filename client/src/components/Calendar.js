@@ -10,9 +10,10 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   back: {
     float: 'left',
     marginLeft: '2px',
@@ -26,14 +27,45 @@ const useStyles = makeStyles({
     float: 'right',
     marginRight: '2px',
     marginTop: '2px',
-  }
-});
+  },
+  circle: {
+      backgroundColor: theme.palette.secondary.main,
+      width: 21,
+      height: 21,
+      display: 'inline-block',
+      textAlign: 'center',
+      borderRadius: '50%',
+  },
+}));
 
-export default function Calendar() {
+export default function Calendar(props) {
   const classes = useStyles();
   const [date, setDate] = useState(new Date());
 
+  const schedule = props.schedule;
   const calendar = getCalendar(date.getFullYear(), date.getMonth());
+
+  function getCellContent(day) {
+    const start = getDaysSinceEpoch(schedule.start);
+    const current = getDaysSinceEpoch(new Date(date.getFullYear(), date.getMonth(), day));
+
+    let text = null;
+    if (current >= start && (current - start) % schedule.interval === 0) {
+      text = schedule.text;
+    }
+
+    if (text) {
+      return (
+        <Tooltip placement="top" title={text}>
+          <div className={classes.circle}>
+            <span style={{color: "white"}}>{day}</span>
+          </div>
+        </Tooltip>
+      );
+    } else {
+      return day;
+    }
+  }
 
   return (
     <TableContainer component={Paper} style={{ width: '500px' }}>
@@ -47,20 +79,22 @@ export default function Calendar() {
       <Table size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Mon</TableCell>
-            <TableCell>Tue</TableCell>
-            <TableCell>Wed</TableCell>
-            <TableCell>Thu</TableCell>
-            <TableCell>Fri</TableCell>
-            <TableCell>Sat</TableCell>
-            <TableCell>Sun</TableCell>
+            <TableCell align="center">Mon</TableCell>
+            <TableCell align="center">Tue</TableCell>
+            <TableCell align="center">Wed</TableCell>
+            <TableCell align="center">Thu</TableCell>
+            <TableCell align="center">Fri</TableCell>
+            <TableCell align="center">Sat</TableCell>
+            <TableCell align="center">Sun</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {Array.from(calendar.rows.entries()).map(([i, row]) => (
             <TableRow key={i}>
               {Array.from(row.entries()).map(([j, cell]) => (
-                <TableCell key={j}>{cell.date}</TableCell>
+                <TableCell align="center" key={j}>
+                  {getCellContent(cell.date)}
+                </TableCell>
               ))}
             </TableRow>
           ))}
@@ -68,6 +102,11 @@ export default function Calendar() {
       </Table>
     </TableContainer>
   )
+}
+
+// https://stackoverflow.com/a/12739212/1466456
+function getDaysSinceEpoch(date) {
+  return Math.floor(date / 8.64e7);
 }
 
 function getCalendar(year, month) {
