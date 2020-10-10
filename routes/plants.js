@@ -63,10 +63,16 @@ async function addGtFields(trimmed) {
     return trimmedWithGt;
 }
 
+// async function plantExist(id) {
+//   let results = await db(`SELECT * FROM plant_data WHERE id = ${id}`);
+//   return results.data.length === 1;
+// }
+
 
 /**********************************************************
  * Routes
  **********************************************************/
+
 router.get('/', async function(req, res, next) {
     let response = await TrefleApi.getPlants();
     if (response.ok) {
@@ -82,10 +88,12 @@ router.get('/', async function(req, res, next) {
     }
 });
 
+
 router.get('/:id', async function(req, res, next) {
     let { id } = req.params;
     let response = await TrefleApi.getPlantById(id);
     if (response.ok) {
+        let plant = response.data.data;
         // Create "trimmed" plant obj with only a few properties
         let trimmed = trimPlants([plant]);  // Note: trimPlants() expects an array
         // Add additional growtherapy (GT) fields if available
