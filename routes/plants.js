@@ -125,6 +125,7 @@ router.get('/:id', async function(req, res, next) {
     let { id } = req.params;
     let response = await TrefleApi.getPlantById(id);
     if (response.ok) {
+        let plant = response.data.data;
         // Create "trimmed" plant obj with only a few properties
         let trimmed = trimPlants([plant]);  // Note: trimPlants() expects an array
         // Add additional growtherapy (GT) fields if available
