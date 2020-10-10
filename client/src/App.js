@@ -26,6 +26,8 @@ import SignUp from "./components/SignUp";
 import PlantView from "./components/PlantView";
 import './App.css';
 
+// import TrefleApi from './helpers/TrefleApi';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
