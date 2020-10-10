@@ -108,4 +108,4 @@ INSERT INTO individual_users (user_id, first_name, last_name)
 INSERT INTO business_users (user_id, company_name, website, location, phone)
     VALUES
     (3, 'Plant Care', 'www.plantcare.com', 'Brooklyn, NY', '718-387-2382'),
-    (4, 'House Plants', 'www.houseplants.com', 'Flower Hill, NY', '718-317-2262')
+    (4, 'House Plants', 'www.houseplants.com', 'Flower Hill, NY', '718-317-2262');
