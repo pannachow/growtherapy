@@ -88,11 +88,13 @@ const useStyles = makeStyles((theme) => ({
 export default function Plants() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
+  // Fetch plants from backend
+  // https://reactjs.org/docs/hooks-intro.html
+  // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
       const result = await fetch("http://localhost:5000/plants");
       const data = await result.json();
-      console.log(data);
       setPlants(data);
     }
     fetchPlants();
