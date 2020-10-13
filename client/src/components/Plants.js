@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -11,6 +11,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
+
 
 function Copyright() {
   return (
@@ -55,18 +58,52 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: "url(plants_footer.jpg)",
     padding: theme.spacing(6),
   },
+  search: {
+    position: 'center',
+    borderRadius: theme.shape.borderRadius,
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  },
+  inputRoot: {
+    color: 'inherit',
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(${theme.spacing(1)}px)`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '12ch',
+      '&:focus': {
+        width: '20ch',
+      },
+    },
+  },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-export default function Album() {
+export default function Plants() {
   const classes = useStyles();
+  const [plants, setPlants] = useState([]);
+  useEffect(() => {
+    async function fetchPlants() {
+      const result = await fetch("http://localhost:5000/plants");
+      const data = await result.json();
+      console.log(data);
+      setPlants(data);
+    }
+    fetchPlants();
+  }, []);
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
+
           <Container>
             <Typography component="h1" variant="h2" align="center" style={{ color: "white" }} gutterBottom>
               To love the beautiful homeplants
@@ -74,13 +111,24 @@ export default function Album() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Find plants and learn to care. Plants for beginners and more!
             </Typography>
+            <div style={{ textAlign: "center" }}>
+              <SearchIcon />
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
           </Container>
+
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {plants.map((plant) => (
+              <Grid item key={plant.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -88,12 +136,17 @@ export default function Album() {
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+
+                    {/* Fetch the back-end plant name here */}
+                    <Typography color="secondary" gutterBottom variant="h5" component="h2">
+                      {plant.common_name}
                     </Typography>
-                    <Typography>
-                      This is a media card. You can use this section to describe the content.
-                    </Typography>
+
+                    {/* Fetch the back-end plant content here */}
+                    <Typography color="textSecondary"> Scientific Name: <span style={{ color: "#009472" }}>{plant.scientific_name}</span> </Typography>
+                    <Typography color="textSecondary"> Family: <span style={{ color: "#009472" }}>{plant.family} </span> </Typography>
+                    <Typography color="textSecondary"> Year: <span style={{ color: "#009472" }}>{plant.year} </span> </Typography>
+
                   </CardContent>
                   <CardActions>
 

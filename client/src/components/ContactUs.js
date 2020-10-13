@@ -1,6 +1,5 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
-
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -57,15 +56,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const background = {
+  position: 'absolute',
+  top: 40,
+  marginRight: 'auto',
+  marginLeft: 'auto',
+  width: '100%',
+  height: '100%',
+  zIndex: -1,
+};
+
 export default function ContactUs() {
 
   const classes = useStyles();
 
   return (
+    <>
+    <img src="contact-us.jpg" alt="background" style={background} />
+
     <Container maxWidth="xs">
+
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography style={{ color: "#454343" }} component="h4" variant="h4">
+        <Typography color="primary" component="h4" variant="h4">
           Contact us
           </Typography>
         <form onSubmit={(e) => sendEmail(e)} className={classes.form} noValidate>
@@ -152,5 +165,6 @@ export default function ContactUs() {
         <Copyright />
       </Box>
     </Container>
+    </>
   );
 }

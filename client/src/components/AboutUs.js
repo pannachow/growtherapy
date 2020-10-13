@@ -4,24 +4,30 @@ import Container from '@material-ui/core/Container';
 
 class AboutUs extends React.Component {
   render() {
+    const background = {
+      position: 'absolute',
+      top: 0,
+      width: '100%',
+      zIndex: -1,
+    };
     return (
-      <Container>
+      <>
         <br />
         <br />
-        <br />
-        <Typography variant="h3" align="center" color="textPrimary" gutterBottom>
-          We are house plant lovers.
+        <Container>
+          <br />
+          <Typography variant="h3" align="center" style={{ color: "#97CD80", fontWeight: "bold" }} gutterBottom>
+            We are house plant lovers
         </Typography>
-        <br />
-        <Typography variant="h6" align="left" color="textSecondary">
-          Plant therapy – it might sound like a new fad, but in fact, the practice is ancient. Engaging with plants can have a relaxing, peaceful effect on many people. Have fun discovering plants that suit your needs and your environment, get recommendations from us, and start watering your plant today!
+          <br />
+          <Typography variant="h6" align="left" style={{ color: "#009472", fontWeight: "bold" }} >
+            Plant therapy – it might sound like a new fad, but in fact, the practice is ancient. Engaging with plants can have a relaxing, peaceful effect on many people. Have fun discovering plants that suit your needs and your environment, get recommendations from us, and start watering your plant today!
         </Typography>
-        <br />
-        <Typography variant="h7" align="left" color="textSecondary">
-          WOW nice
-        </Typography>
-        <img src="background.svg" alt="background" />
-      </Container>
+          <br />
+        </Container>
+        <img src="about-us.jpg" alt="background" style={background} />
+
+      </>
     );
   }
 }

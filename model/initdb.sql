@@ -13,49 +13,53 @@ CREATE TABLE plant_data (
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    email VARCHAR(100) NOT NULL,
-    password VARCHAR(200) NOT NULL
-);
-
-DROP TABLE IF EXISTS individual_users;
-CREATE TABLE individual_users (
-    user_id INT NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(200) NOT NULL,
+    plant_id int NOT NULL,
+        FOREIGN KEY (plant_id) REFERENCES plant_data(id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS business_users;
-CREATE TABLE business_users (
-    user_id INT NOT NULL,
-    company_name VARCHAR(20) NOT NULL,
-    website VARCHAR(20) NOT NULL,
-    location VARCHAR(20) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
-    );
+-- DROP TABLE IF EXISTS individual_users;
+-- CREATE TABLE individual_users (
+--     user_id INT NOT NULL,
+--     first_name VARCHAR(50) NOT NULL,
+--     last_name VARCHAR(50) NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+-- );
 
-DROP TABLE IF EXISTS individual_users_plants;
-CREATE TABLE individual_users_plants (
-    user_id INT NOT NULL,
-    plant_id INT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES individual_user(id),
-        FOREIGN KEY (plant_id) REFERENCES plant_data(id)
-    );
+-- DROP TABLE IF EXISTS business_users;
+-- CREATE TABLE business_users (
+--     user_id INT NOT NULL,
+--     company_name VARCHAR(20) NOT NULL,
+--     website VARCHAR(20) NOT NULL,
+--     location VARCHAR(20) NOT NULL,
+--     phone VARCHAR(20) NOT NULL,
+--         FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+--     );
 
-DROP TABLE IF EXISTS business_users_plants;
-CREATE TABLE business_users_plants (
-    user_id INT NOT NULL,
-    plant_id INT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES business_user(id),
-        FOREIGN KEY (plant_id) REFERENCES plant_data(id)
-    );
+-- DROP TABLE IF EXISTS users_plants;
+-- CREATE TABLE users_plants (
+--     user_id INT NOT NULL,
+--     plant_id INT NOT NULL,
+--         FOREIGN KEY (user_id) REFERENCES users(id),
+--         FOREIGN KEY (plant_id) REFERENCES plant_data(id)
+--     );
+
+-- DROP TABLE IF EXISTS business_users_plants;
+-- CREATE TABLE business_users_plants (
+--     user_id INT NOT NULL,
+--     plant_id INT NOT NULL,
+--         FOREIGN KEY (user_id) REFERENCES business_user(id),
+--         FOREIGN KEY (plant_id) REFERENCES plant_data(id)
+--     );
 
 INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, notes)
     VALUES 
     -- Sansevieria trifasciata
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_snake_plant_1150x1150.jpg?v=1554229767',
-    1220287, 1, 2, 'Allow soil to completely dry out in between waterings – this plant is prone to rot if overwatered.'),
+    1258091, 1, 2, 'Allow soil to completely dry out in between waterings – this plant is prone to rot if overwatered.'),
 
     -- ZZ
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_zz_plant_1150x1150.jpg?v=1554229986',
@@ -69,7 +73,7 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_xerographica_product_4fc85c5a-1a67-4b00-8cf1-ff704988cae5_2632x2632.jpg?v=1554910730',
     292693, 2, 3, 'No soil needed. To water, fully submerge in room temperature water approximately once a week for 20-30 minutes. To dry, lay upside down on a towel to to rid of excess water'),
 
-    -- Alocasia Polly
+    -- Alocasia Polly/ Kris' Plant
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/image_6_499x748.png?v=1593461332',
     344495, 2, 3, 'Allow soil to dry out on the top 2” - 3” before fully saturating with water'),
 
@@ -83,7 +87,7 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
 
     -- Aloe Vera
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/3e8077490855372b69b03077f914441a_1188x1856.jpg?v=1595340563',
-    1159475, 3, 2, 'Water thoroughly when soil is completely dry'),
+    103926, 3, 2, 'Water thoroughly when soil is completely dry'),
 
     -- Prayer Plant
     ('https://bloomscape.com/wp-content/uploads/2019/11/bloomscape-product-detail_red-prayer-plant-scaled.jpg?ver=94596',
@@ -93,19 +97,9 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/89DEFAC3-BC39-4C58-8049-A6E29E22DFAA_1280x1920.jpg?v=1598322085',
     360933, 2, 1, 'When the tips of ponytail turn brown — just snip these off and adjust watering if necessary.');
 
-INSERT INTO users (email, password)
+INSERT INTO users (first_name, last_name, email, password, plant_id)
     VALUES
-    ('joe@acme.com', 'pass1'),
-    ('mary@gmail.com', 'pass2'),
-    ('plant@care.com', 'pass3'),
-    ('house@plants.com', 'pass4');
-
-INSERT INTO individual_users (user_id, first_name, last_name)
-    VALUES
-    (1, 'Joe', 'Smith'),
-    (2, 'Mary', 'Hernandez');
-
-INSERT INTO business_users (user_id, company_name, website, location, phone)
-    VALUES
-    (3, 'Plant Care', 'www.plantcare.com', 'Brooklyn, NY', '718-387-2382'),
-    (4, 'House Plants', 'www.houseplants.com', 'Flower Hill, NY', '718-317-2262')
+    ('Joe', 'Smith', 'joe@acme.com', 'pass1', 8),
+    ('Mary', 'Rodriguez', 'mary@gmail.com', 'pass2', 3),
+    ('Alexandra', 'Cook', 'plant@care.com', 'pass3', 5),
+    ('Brad', 'Yalom', 'house@plants.com', 'pass4', 1);
