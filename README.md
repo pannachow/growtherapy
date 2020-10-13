@@ -5,8 +5,8 @@ Growtherapy is a full-stack application that helps you take care of your house p
 # Basic information
 
 ![User Flow Diagram](support/user_flow.jpg)
-![Database Schema](database_schema.png)
-![API Routes](API_routes.png)
+![Database Schema](support/database_schema.png)
+![API Routes](/support/api-routes.jpg)
 
 ## Objectives
 
