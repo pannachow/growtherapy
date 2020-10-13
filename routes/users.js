@@ -11,13 +11,13 @@ const db = require("../model/helper");
 **/
 
 router.post('/register', async (req, res, next) => {
-  let { email, password } = req.body;
+  let { first_name, last_name, email, password } = req.body;
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   try {
       let sql = `
-          INSERT INTO users (email, password)
-          VALUES ('${email}', '${hashedPassword}')
+          INSERT INTO users (first_name, last_name, email, password)
+          VALUES ('${first_name}, '${last_name}', ${email}', '${hashedPassword}')
       `;
       await db(sql);
       res.send({ message: 'Registration succeeded' });
@@ -65,7 +65,7 @@ router.post('/login', async (req, res, next) => {
 **/
 
 router.get('/users', async function(req, res, next) {
-  let sql = 'SELECT email FROM users ORDER BY email';
+  let sql = 'SELECT * FROM users ORDER BY email';
   try {
       let results = await db(sql);
       res.send(results.data);
@@ -91,7 +91,6 @@ router.get('/:userId/profile', ensureSameUser, async function(req, res, next) {
       next(err);
   }
 });
-
 
 
 
