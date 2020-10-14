@@ -54,7 +54,6 @@ class App extends React.Component {
     if (response.ok) {
       Auth.loginUser(response.data.token, response.data.userId);
       this.setState({ userId: response.data.userId, loginError: '' });
-      // this.props.history.push('/');
     } else {
       this.setState({ loginError: response.error });
     }

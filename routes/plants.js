@@ -30,7 +30,6 @@ function trimPlants(plants) {
 /**
  * Add growtherapy (GT) fields from DB if available
  **/
-
 async function addGtFields(trimmed) {
     // Get the IDs of all "trimmed" plants
     let ids = trimmed.map((p) => p.id);
@@ -39,27 +38,23 @@ async function addGtFields(trimmed) {
         SELECT * FROM plant_data 
         WHERE trefle_plant_id IN (${ids.join(',')});
     `;
-
     let trimmedWithGt = [ ...trimmed ];  // copy trimmed array
     try {
         let results = await db(sql);
         let rows = results.data;
         // If any GT data was found, add it to trimmed plants
-        if (rows.length > 0) {
-            trimmedWithGt.forEach((p) => {
-                // Get index of GT data in rows (if it exists)
-                let gtIx = rows.findIndex((gt) => p.id === gt.trefle_plant_id);
-                if (gtIx === -1) {
-                    p.growtherapy = null;  // no GT data found
-                } else {
-                    p.growtherapy = rows[gtIx];  // add GT data to trimmed plant obj
-                }
-            });
-        }
+        trimmedWithGt.forEach((p) => {
+            // Get index of GT data in rows (if it exists)
+            let gtIx = rows.findIndex((gt) => p.id === gt.trefle_plant_id);
+            if (gtIx === -1) {
+                p.growtherapy = null;  // no GT data found
+            } else {
+                p.growtherapy = rows[gtIx];  // add GT data to trimmed plant obj
+            }
+        });
     } catch (err) {
         console.log('addGtFields() error:', err);
     }
-
     return trimmedWithGt;
 }
 
