@@ -52,7 +52,7 @@ router.post('/login', async (req, res, next) => {
       let results = await db(`SELECT * FROM users WHERE email = '${email}'`);
       if (results.data.length === 0) {
           // Email not found
-          res.status(400).send({ error: 'Login failed' });
+          res.status(400).send({ error: 'Login failed. Please try again.' });
       } else {
           let row = results.data[0];  // the user's row/record from the DB
           let passwordsEqual = await bcrypt.compare(password, row.password);

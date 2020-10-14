@@ -2,6 +2,7 @@ import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
+  withRouter,
   Switch,
   Route,
 } from "react-router-dom";
@@ -62,7 +63,7 @@ class App extends React.Component {
   doLogout() {
     Auth.logoutUser();
     this.setState({ userId: '' });
-    // this.props.history.push('/');
+    this.props.history.push('/');
   }
 
   render() {
@@ -124,4 +125,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);
