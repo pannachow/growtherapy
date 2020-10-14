@@ -75,10 +75,6 @@ async function addGtFields(trimmed) {
  * Routes
  **********************************************************/
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 944f8d01... no chnages
 router.get('/', async function(req, res, next) {
     let response = await TrefleApi.getPlants();
     if (response.ok) {
@@ -94,10 +90,6 @@ router.get('/', async function(req, res, next) {
     }
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 944f8d01... no chnages
 
 router.get('/:id', async function(req, res, next) {
     let { id } = req.params;
