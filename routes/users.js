@@ -7,17 +7,32 @@ const { ensureSameUser } = require('../middleware/guards');
 const db = require("../model/helper");
 
 /**
+* Get all users
+**/
+
+router.get('/', async function(req, res, next) {
+    let sql = 'SELECT email, password FROM users ORDER BY email';
+    try {
+        let results = await db(sql);
+        res.send(results.data);
+    } catch (err) {
+        next(err);
+    }
+  });
+
+/**
 * Register a user
 **/
 
 router.post('/register', async (req, res, next) => {
   let { first_name, last_name, email, password } = req.body;
+//   console.log(password, BCRYPT_WORK_FACTOR);
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
   try {
       let sql = `
           INSERT INTO users (first_name, last_name, email, password)
-          VALUES ('${first_name}, '${last_name}', ${email}', '${hashedPassword}')
+          VALUES ('${first_name}', '${last_name}', '${email}', '${hashedPassword}')
       `;
       await db(sql);
       res.send({ message: 'Registration succeeded' });
@@ -34,7 +49,7 @@ router.post('/login', async (req, res, next) => {
   let { email, password } = req.body;
 
   try {
-      let results = await db(`SELECT * FROM users WHERE email = '${email }'`);
+      let results = await db(`SELECT * FROM users WHERE email = '${email}'`);
       if (results.data.length === 0) {
           // Email not found
           res.status(400).send({ error: 'Login failed' });
@@ -61,20 +76,6 @@ router.post('/login', async (req, res, next) => {
 });
 
 /**
-* Get all users
-**/
-
-router.get('/users', async function(req, res, next) {
-  let sql = 'SELECT * FROM users ORDER BY email';
-  try {
-      let results = await db(sql);
-      res.send(results.data);
-  } catch (err) {
-      next(err);
-  }
-});
-
-/**
  * Get the user's profile page.
  * A user can only see his/her own profile page.
  **/
@@ -91,7 +92,6 @@ router.get('/:userId/profile', ensureSameUser, async function(req, res, next) {
       next(err);
   }
 });
-
 
 
 module.exports = router;
