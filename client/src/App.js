@@ -58,6 +58,7 @@ class App extends React.Component {
     } else {
       this.setState({ loginError: response.error });
     }
+    return response.ok;
   }
 
   doLogout() {
