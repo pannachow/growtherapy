@@ -26,7 +26,6 @@ import SignUp from "./components/SignUp";
 import PlantView from "./components/PlantView";
 import './App.css';
 
-// import TrefleApi from './helpers/TrefleApi';
 
 const theme = createMuiTheme({
   palette: {
@@ -66,6 +65,9 @@ class App extends React.Component {
     // this.props.history.push('/');
   }
 
+
+
+
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -81,7 +83,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/plants" exact>
-              <Plants />
+                <Plants />
             </Route>
 
             <Route path="/FAQ" exact>
@@ -113,7 +115,7 @@ class App extends React.Component {
             </PrivateRoute>
 
             <Route path="/plant-view" exact>
-              <PlantView />
+                <PlantView />
             </Route>
 
             <ErrorView code="404" text="Not Found" />

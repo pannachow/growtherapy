@@ -11,9 +11,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
+<<<<<<< HEAD
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
+=======
+import { getPlants } from '../helpers/TrefleApi.Client';
+>>>>>>> 944f8d01... no chnages
 
 function Copyright() {
   return (
@@ -98,6 +102,7 @@ export default function Plants() {
     fetchPlants();
   }, []);
 
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -127,19 +132,38 @@ export default function Plants() {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
+<<<<<<< HEAD
             {plants.map((plant) => (
               <Grid item key={plant.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
+=======
+            {cards.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card} 
+                // key={(p) => this.getPlants(p.id)}
+                >
+>>>>>>> 944f8d01... no chnages
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    image= //{(p) => this.getPlants(p.image_url)} 
+                    "https://source.unsplash.com/random"
+                    //title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
+<<<<<<< HEAD
 
                     {/* Fetch the back-end plant name here */}
                     <Typography color="secondary" gutterBottom variant="h5" component="h2">
                       {plant.common_name}
+=======
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {/* {(p) => this.getPlants(p.common_name)} */}
+                      Heading
+                    </Typography>
+                    <Typography>
+                      {/* {(p) => this.getPlants(p.family)} */}
+                      This is a media card. You can use this section to describe the content.
+>>>>>>> 944f8d01... no chnages
                     </Typography>
 
                     {/* Fetch the back-end plant content here */}

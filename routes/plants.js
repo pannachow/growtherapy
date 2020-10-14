@@ -39,11 +39,13 @@ async function addGtFields(trimmed) {
         SELECT * FROM plant_data 
         WHERE trefle_plant_id IN (${ids.join(',')});
     `;
+    console.log(sql);
 
     let trimmedWithGt = [ ...trimmed ];  // copy trimmed array
     try {
         let results = await db(sql);
         let rows = results.data;
+        console.log(results.data);
         // If any GT data was found, add it to trimmed plants
         if (rows.length > 0) {
             trimmedWithGt.forEach((p) => {
@@ -73,6 +75,10 @@ async function addGtFields(trimmed) {
  * Routes
  **********************************************************/
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 944f8d01... no chnages
 router.get('/', async function(req, res, next) {
     let response = await TrefleApi.getPlants();
     if (response.ok) {
@@ -88,6 +94,10 @@ router.get('/', async function(req, res, next) {
     }
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 944f8d01... no chnages
 
 router.get('/:id', async function(req, res, next) {
     let { id } = req.params;
