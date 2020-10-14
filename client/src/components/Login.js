@@ -76,6 +76,8 @@ class Login extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.login(this.state.email, this.state.password);
+    this.setState({ email: '', password: '' });
+    this.props.history.push('/');
   }
 
 
@@ -89,9 +91,6 @@ class Login extends React.Component {
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
-              Log in
-            </Typography>
             {/* Login error message displayed here */}
             {
               this.props.error && (
