@@ -9,7 +9,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SideDrawer from './SideDrawer';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,9 +64,6 @@ function Navigation(props) {
               <Link underline="none" component={RouterLink} to={`/users/${props.userId}/profile`}>
               <Button style={{ color: "#97CD80", fontWeight: "bold" }}>Profile</Button>
               </Link>
-
-              {/* <Avatar src="/broken-image.jpg" /> */}
-              {/* {props.userId} */}
 
               <Link underline="none" component={RouterLink} to="/">
                 <Button style={{ color: "#97CD80", fontWeight: "bold" }} onClick={logout}>LOG OUT</Button>

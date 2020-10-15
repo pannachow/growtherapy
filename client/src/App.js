@@ -113,7 +113,7 @@ class App extends React.Component {
               <SecretView />
             </PrivateRoute>
 
-            <Route path="/plant-view" exact>
+            <Route path="/plant-view/:id" exact>
               <PlantView />
             </Route>
 

@@ -152,10 +152,10 @@ export default function Plants() {
                   </CardContent>
                   <CardActions>
 
-                    <Link component={RouterLink} to="/plant-view">
+                    <Link component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
                         View
-                    </Button>
+                      </Button>
                     </Link>
 
                     <Button size="small" color="primary">
