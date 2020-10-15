@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Plants() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
+  const [search, setSearch] = useState('');
   // Fetch plants from backend
   // https://reactjs.org/docs/hooks-intro.html
   // https://www.robinwieruch.de/react-hooks-fetch-data
@@ -100,8 +101,16 @@ export default function Plants() {
     fetchPlants();
   }, []);
 
+  function filterSearch(plant) {
+    // Either return true if you want the plant to be shown or otherwise false.
+    if (plant.common_name.toUpperCase().includes(search.toUpperCase())) {
+      return true;
+    }
+    return false;
+  }
+
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
@@ -113,9 +122,13 @@ export default function Plants() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Find plants and learn to care. Plants for beginners and more!
             </Typography>
+
+            {/* need to search for the plant */}
             <div style={{ textAlign: "center" }}>
               <SearchIcon />
               <InputBase
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
@@ -124,12 +137,13 @@ export default function Plants() {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
+
           </Container>
 
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {plants.map((plant) => (
+            {plants.filter(filterSearch).map((plant) => (
               <Grid item key={plant.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
@@ -151,7 +165,6 @@ export default function Plants() {
 
                   </CardContent>
                   <CardActions>
-
                     <Link component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
                         View
@@ -175,7 +188,7 @@ export default function Plants() {
         </Typography>
         <Copyright />
       </footer>
-    </React.Fragment>
+    </>
   );
 }
 
