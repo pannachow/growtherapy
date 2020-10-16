@@ -6,6 +6,34 @@ const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require('../config');
 const { ensureSameUser } = require('../middleware/guards');
 const db = require("../model/helper");
 
+
+/**
+ * Helper functions 
+ */
+
+async function userExists(id) {
+    let exists = false;
+    try {
+        let response = await db(`SELECT * FROM users WHERE id = ${id}`);
+        if (response.data.length > 0) {
+            exists = true;
+        }
+    } catch (err) {}
+    return exists;
+}
+
+async function emailExists(email) {
+    let exists = false;
+    try {
+        let response = await db(`SELECT * FROM users WHERE email = '${email}'`);
+        if (response.data.length > 0) {
+            exists = true;
+        }
+    } catch (err) {}
+    return exists;
+}
+
+
 /**
 * Get all users
 **/
@@ -28,6 +56,11 @@ router.post('/register', async (req, res, next) => {
   let { first_name, last_name, email, password } = req.body;
 //   console.log(password, BCRYPT_WORK_FACTOR);
   let hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+
+  if ((await emailExists(email)) === true) {
+      res.status(400).send({ message: 'It appears you have an existing account with us.'});
+      return;
+  }
 
   try {
       let sql = `

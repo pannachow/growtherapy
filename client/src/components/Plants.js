@@ -95,6 +95,8 @@ export default function Plants() {
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
+      
+//  const result = await fetch("/plants");
       const result = await fetch("http://localhost:5000/plants/?gt=1");
       const data = await result.json();
       setPlants(data);
