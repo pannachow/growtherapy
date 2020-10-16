@@ -28,7 +28,7 @@ function Copyright() {
   );
 }
 
-const classes = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100vh',
   },
@@ -59,100 +59,91 @@ const classes = makeStyles((theme) => ({
   },
 }));
 
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
+function Login(props) {
+  const classes = useStyles();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const ok = await props.login(email, password);
+    if (ok) {
+      setEmail("");
+      setPassword("");
+      props.history.push('/');
     }
   }
 
-  handleChange(event) {
-    let { name, value } = event.target;
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.login(this.state.email, this.state.password);
-    this.setState({ email: '', password: '' });
-    this.props.history.push('/');
-  }
-
-
-  render() {
-    return (
-      <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-          <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            {/* Login error message displayed here */}
-            {
-              this.props.error && (
-                <div>{this.props.error}</div>
-              )
-            }
-            <form className={classes.form} onSubmit={(e) => this.handleSubmit(e)}>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={this.state.email}
-                onChange={(e) => this.handleChange(e)}
-                autoFocus
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={this.state.password}
-                onChange={(e) => this.handleChange(e)}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Log In
+  return (
+    <Grid container component="main" className={classes.root}>
+      <CssBaseline />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          {/* Login error message displayed here */}
+          {
+            props.error && (
+              <div>{props.error}</div>
+            )
+          }
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Log In
               </Button>
-              <Grid container>
-                <Grid item>
-                  <Link color="secondary" underline="none" component={RouterLink} to="/sign-up">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
+            <Grid container>
+              <Grid item>
+                <Link color="secondary" underline="none" component={RouterLink} to="/sign-up">
+                  {"Don't have an account? Sign Up"}
+                </Link>
               </Grid>
-              <Box mt={5}>
-                <Copyright />
-              </Box>
-            </form>
-          </div>
-        </Grid>
+            </Grid>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </form>
+        </div>
       </Grid>
-    );
-  }
+    </Grid>
+  );
 }
 
 export default withRouter(Login);
