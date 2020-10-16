@@ -67,6 +67,27 @@ class App extends React.Component {
     this.props.history.push('/');
   }
 
+  async doSignUp(newFirstName, newLastName, newEmail, newPassword) {
+    let newUser = { firstname: newFirstName, lastname: newLastName, email: newEmail, password: newPassword };
+    console.log(newUser);
+    let options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser)
+    };
+    
+    try {
+      let response = await fetch('/users/register', options);
+      if (response.ok) {
+        console.log("Registration succeeded");
+      } else {
+        console.log('Registration failed', response.status, response.statusText);
+      }
+    } catch (err) {
+      console.log("Exception:", err.message);
+    }
+  }
+
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -100,7 +121,8 @@ class App extends React.Component {
             </Route>
 
             <Route path="/sign-up" exact>
-              <SignUp />
+              <SignUp
+                register={(f, l, e, p) => this.doSignUp(f, l, e, p)} />
             </Route>
 
             <PrivateRoute
