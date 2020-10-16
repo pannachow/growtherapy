@@ -5,11 +5,17 @@ const { TREFLE_TOKEN } = require('../config');
 
 const TREFLE_BASE_URL = 'https://trefle.io/api/v1/species';
 
+let PlantCache = new Map();
+
 
 class TrefleApi {
 
-    /**
+    /******************************************************
      * Public helper methods
+     ******************************************************/
+
+    /**
+     * Fetch plants
      **/
 
     static async getPlants() {
@@ -18,15 +24,57 @@ class TrefleApi {
         return response;
     }
 
+
+    /**
+     * Fetch & cache plants with specific IDs
+     **/
+
+    static async getPlantsByIds(ids) {
+        console.log('getPlantsByIds:', ids);
+
+        // Fetch any of the plants we haven't already cached
+        let promises = [];
+        for (let id of ids) {
+            if ( !PlantCache.has(id) ) {
+                promises.push( TrefleApi._request('GET', `/${id}`) );
+                console.log('  fetching', id);
+            }
+        }
+
+        // Once they are all resolved, add them to cache
+        let responses = await Promise.all(promises);
+        for (let resp of responses) {
+            let plant = resp.data.data;
+            PlantCache.set(plant.id, plant);
+            console.log('  caching', plant.id);
+        }
+
+        // Create a "faux" response
+        let plants = ids.map((id) => PlantCache.get(id));
+        let fauxResponse = { 
+            ok: true, 
+            data: { data: plants }
+        };
+
+        return fauxResponse;
+    }
+
+
+    /**
+     * Fetch one plant
+     **/
+
     static async getPlantById(id) {
         let response = await TrefleApi._request('GET', `/${id}`);
 
         return response;
     }
 
-    /**
-     * Private method
-     **/
+
+    /******************************************************
+     * Private Methods
+     ******************************************************/
+
 
     static async _request(method, endpoint, body = null) {
         // Construct URL: base + endpoint + token
@@ -77,7 +125,7 @@ class TrefleApi {
 
         return response;
     }
-    
+
 }
 
 module.exports = TrefleApi;

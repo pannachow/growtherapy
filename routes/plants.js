@@ -69,7 +69,15 @@ async function addGtFields(trimmed) {
  **********************************************************/
 
 router.get('/', async function(req, res, next) {
-    let response = await TrefleApi.getPlants();
+    let response;
+    if ('gt' in req.query) {
+        let results = await db('SELECT trefle_plant_id FROM plant_data');
+        let ids = results.data.map((row) => row.trefle_plant_id);
+        response = await TrefleApi.getPlantsByIds(ids);
+    } else {
+        response = await TrefleApi.getPlants();
+    }
+
     if (response.ok) {
         let plants = response.data.data;
         // Create "trimmed" plant objs with only the properties in PLANT_KEYS
