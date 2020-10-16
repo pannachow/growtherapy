@@ -61,13 +61,17 @@ const useStyles = makeStyles((theme) => ({
 
 function Login(props) {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  function login(e) {
-    e.preventDefault();
-    props.login(email, password);
-    props.history.push('/');
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const ok = await props.login(email, password);
+    if (ok) {
+      setEmail("");
+      setPassword("");
+      props.history.push('/');
+    }
   }
 
   return (
@@ -79,16 +83,13 @@ function Login(props) {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Log in
-          </Typography>
           {/* Login error message displayed here */}
           {
             props.error && (
               <div>{props.error}</div>
             )
           }
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -99,7 +100,7 @@ function Login(props) {
               name="email"
               autoComplete="email"
               value={email}
-              onChange={(e) => setEmail(e.value)}
+              onChange={(e) => setEmail(e.target.value)}
               autoFocus
             />
             <TextField
@@ -113,7 +114,7 @@ function Login(props) {
               id="password"
               autoComplete="current-password"
               value={password}
-              onChange={(e) => setPassword(e.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -125,10 +126,9 @@ function Login(props) {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={login}
             >
               Log In
-            </Button>
+              </Button>
             <Grid container>
               <Grid item>
                 <Link color="secondary" underline="none" component={RouterLink} to="/sign-up">

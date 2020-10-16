@@ -62,15 +62,17 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+
 export default function Album() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
+  const [search, setSearch] = useState('');
   // Fetch plants from backend
   // https://reactjs.org/docs/hooks-intro.html
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
-      const result = await fetch('GET', '/plants');
+      const result = await fetch('http://localhost:5000/plants');
       const data = await result.json();
       setPlants(data);
     }
@@ -78,8 +80,16 @@ export default function Album() {
   }, []);
   
 
+  function filterSearch(plant) {
+    // Either return true if you want the plant to be shown or otherwise false.
+    if (plant.common_name.toUpperCase().includes(search.toUpperCase())) {
+      return true;
+    }
+    return false;
+  }
+
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
@@ -91,9 +101,13 @@ export default function Album() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Find plants and learn to care. Plants for beginners and more!
             </Typography>
+
+            {/* need to search for the plant */}
             <div style={{ textAlign: "center" }}>
               <SearchIcon />
               <InputBase
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
@@ -103,12 +117,13 @@ export default function Album() {
 
               />
             </div>
+
           </Container>
 
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {plants.map((plant) => (
+            {plants.filter(filterSearch).map((plant) => (
               <Grid item key={plant.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
@@ -130,9 +145,8 @@ export default function Album() {
 
                   </CardContent>
                   <CardActions>
-
-                    <Link component={RouterLink} to="/plant-view">
-                      <Button size="small" color="primary" item key={plant.id}>
+                    <Link component={RouterLink} to={`/plant-view/${plant.id}`}>
+                      <Button size="small" color="primary">
                         View
                       </Button>
                     </Link>
@@ -154,7 +168,7 @@ export default function Album() {
         </Typography>
         <Copyright />
       </footer>
-    </React.Fragment>
+    </>
   );
 }
 

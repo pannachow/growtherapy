@@ -44,7 +44,7 @@ class ProfileView extends React.Component {
     let u = this.state.user;
     return (
       <div className="ProfileView">
-        <h2>Profile View</h2>
+        <h2>Hello,</h2>
                 ID: {u.id}<br />
                 Email: {u.email}
       </div>

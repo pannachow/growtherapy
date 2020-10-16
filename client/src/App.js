@@ -2,6 +2,7 @@ import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
+  withRouter,
   Switch,
   Route,
 } from "react-router-dom";
@@ -53,16 +54,16 @@ class App extends React.Component {
     if (response.ok) {
       Auth.loginUser(response.data.token, response.data.userId);
       this.setState({ userId: response.data.userId, loginError: '' });
-      // this.props.history.push('/');
     } else {
       this.setState({ loginError: response.error });
     }
+    return response.ok;
   }
 
   doLogout() {
     Auth.logoutUser();
     this.setState({ userId: '' });
-    // this.props.history.push('/');
+    this.props.history.push('/');
   }
 
 
@@ -114,8 +115,8 @@ class App extends React.Component {
               <SecretView />
             </PrivateRoute>
 
-            <Route path="/plant-view" exact>
-                <PlantView />
+            <Route path="/plant-view/:id" exact>
+              <PlantView />
             </Route>
 
             <ErrorView code="404" text="Not Found" />
@@ -127,4 +128,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

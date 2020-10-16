@@ -16,10 +16,16 @@ CREATE TABLE users (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    password VARCHAR(200) NOT NULL,
-    plant_id int NOT NULL,
-        FOREIGN KEY (plant_id) REFERENCES plant_data(id) ON DELETE CASCADE
+    password VARCHAR(200) NOT NULL
 );
+
+DROP TABLE IF EXISTS users_plants;
+CREATE TABLE users_plants (
+    user_id INT NOT NULL,
+    plant_id INT NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (plant_id) REFERENCES plant_data(id)
+    );
 
 -- DROP TABLE IF EXISTS individual_users;
 -- CREATE TABLE individual_users (
@@ -37,14 +43,6 @@ CREATE TABLE users (
 --     location VARCHAR(20) NOT NULL,
 --     phone VARCHAR(20) NOT NULL,
 --         FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
---     );
-
--- DROP TABLE IF EXISTS users_plants;
--- CREATE TABLE users_plants (
---     user_id INT NOT NULL,
---     plant_id INT NOT NULL,
---         FOREIGN KEY (user_id) REFERENCES users(id),
---         FOREIGN KEY (plant_id) REFERENCES plant_data(id)
 --     );
 
 -- DROP TABLE IF EXISTS business_users_plants;
@@ -96,10 +94,3 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     -- Ponytail Palm
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/89DEFAC3-BC39-4C58-8049-A6E29E22DFAA_1280x1920.jpg?v=1598322085',
     360933, 2, 1, 'When the tips of ponytail turn brown — just snip these off and adjust watering if necessary.');
-
-INSERT INTO users (first_name, last_name, email, password, plant_id)
-    VALUES
-    ('Joe', 'Smith', 'joe@acme.com', 'pass1', 8),
-    ('Mary', 'Rodriguez', 'mary@gmail.com', 'pass2', 3),
-    ('Alexandra', 'Cook', 'plant@care.com', 'pass3', 5),
-    ('Brad', 'Yalom', 'house@plants.com', 'pass4', 1);

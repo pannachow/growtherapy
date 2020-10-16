@@ -30,40 +30,32 @@ function trimPlants(plants) {
 /**
  * Add growtherapy (GT) fields from DB if available
  **/
-
 async function addGtFields(trimmed) {
-  console.log('trimmed: ', trimmed)
-  // Get the IDs of all "trimmed" plants
-  let ids = trimmed.map((p) => p.id);
-  // Create SQL to SELECT those IDs
-  let sql = `
-      SELECT * FROM plant_data 
-      WHERE trefle_plant_id IN (${ids.join(',')});
-  `;
-  console.log('sql:', sql);
-  // let trimmedWithGt = [ ...trimmed ];  // copy trimmed array
-  let trimmedWithGt = [];
-  try {
-      let results = await db(sql);
-      let rows = results.data;
-      console.log('rows:', rows.length);
-      // If any GT data was found, add it to trimmed plants
-      trimmed.forEach((p) => {
-          // Get index of GT data in rows (if it exists)
-          let gtIx = rows.findIndex((gt) => p.id === gt.trefle_plant_id);
-          if (gtIx > -1) {
-              //if extra plant data found, add it
-
-              p.growtherapy = rows[gtIx];  // add GT data to trimmed plant obj
-              //push on trimmedWithGT []
-              trimmedWithGt.push(p);
-          }
-      });
-  } catch (err) {
-      console.log('addGtFields() error:', err);
-  }
-  console.log('withGT: ', trimmedWithGt);
-  return trimmedWithGt;
+    // Get the IDs of all "trimmed" plants
+    let ids = trimmed.map((p) => p.id);
+    // Create SQL to SELECT those IDs
+    let sql = `
+        SELECT * FROM plant_data 
+        WHERE trefle_plant_id IN (${ids.join(',')});
+    `;
+    let trimmedWithGt = [ ...trimmed ];  // copy trimmed array
+    try {
+        let results = await db(sql);
+        let rows = results.data;
+        // If any GT data was found, add it to trimmed plants
+        trimmedWithGt.forEach((p) => {
+            // Get index of GT data in rows (if it exists)
+            let gtIx = rows.findIndex((gt) => p.id === gt.trefle_plant_id);
+            if (gtIx === -1) {
+                p.growtherapy = null;  // no GT data found
+            } else {
+                p.growtherapy = rows[gtIx];  // add GT data to trimmed plant obj
+            }
+        });
+    } catch (err) {
+        console.log('addGtFields() error:', err);
+    }
+    return trimmedWithGt;
 }
 
 // async function plantExist(id) {
@@ -77,7 +69,15 @@ async function addGtFields(trimmed) {
  **********************************************************/
 
 router.get('/', async function(req, res, next) {
-    let response = await TrefleApi.getPlants();
+    let response;
+    if ('gt' in req.query) {
+        let results = await db('SELECT trefle_plant_id FROM plant_data');
+        let ids = results.data.map((row) => row.trefle_plant_id);
+        response = await TrefleApi.getPlantsByIds(ids);
+    } else {
+        response = await TrefleApi.getPlants();
+    }
+
     if (response.ok) {
         let plants = response.data.data;
         // Create "trimmed" plant objs with only the properties in PLANT_KEYS
