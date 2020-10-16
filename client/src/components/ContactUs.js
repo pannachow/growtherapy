@@ -58,11 +58,9 @@ const useStyles = makeStyles((theme) => ({
 
 const background = {
   position: 'absolute',
-  top: 40,
-  marginRight: 'auto',
-  marginLeft: 'auto',
-  width: '100%',
-  height: '100%',
+  top: 100,
+  marginRight: '50%',
+  marginLeft: '30%',
   zIndex: -1,
 };
 
@@ -72,7 +70,7 @@ export default function ContactUs() {
 
   return (
     <>
-    <img src="contact-us.jpg" alt="background" style={background} />
+    <img src="contact-us.svg" alt="background" style={background} />
 
     <Container maxWidth="xs">
 

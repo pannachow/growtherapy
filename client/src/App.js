@@ -9,18 +9,14 @@ import {
 
 import Auth from './helpers/Auth';
 import Api from './helpers/Api';
-
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
-
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Plants from "./components/Plants";
 import FAQ from "./components/FAQ";
 import ContactUs from "./components/ContactUs";
-
 import Login from "./components/Login";
-import SecretView from './components/SecretView';
 import ProfileView from './components/ProfileView';
 import ErrorView from './components/ErrorView';
 import SignUp from "./components/SignUp";
@@ -130,12 +126,8 @@ class App extends React.Component {
               exact
               component={ProfileView}
             />
-
-            <PrivateRoute path="/secret" exact>
-              <SecretView />
-            </PrivateRoute>
-
-            <Route path="/plant-view" exact>
+            
+            <Route path="/plant-view/:id" exact>
               <PlantView />
             </Route>
 

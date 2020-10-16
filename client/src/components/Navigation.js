@@ -9,8 +9,10 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SideDrawer from './SideDrawer';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
-// import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +40,16 @@ function Navigation(props) {
     setState({ ...state, open: open });
   };
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   function logout() {
     props.doLogout();
     props.history.push('/');
@@ -58,22 +70,25 @@ function Navigation(props) {
 
           {props.userId ? (
             <>
-              <Link underline="none" component={RouterLink} to="/secret">
-                <Button style={{ color: "#97CD80", fontWeight: "bold" }}>My Plants</Button>
-              </Link>
+              <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <AccountCircleIcon style={{ color: "white",  fontSize: 50 }} /> 
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <Link underline="none" component={RouterLink} to={`/users/${props.userId}/profile`}>
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                </Link>
 
-              <Link underline="none" component={RouterLink} to={`/users/${props.userId}/profile`}>
-              <Button style={{ color: "#97CD80", fontWeight: "bold" }}>Profile</Button>
-              </Link>
-
-              {/* <Avatar src="/broken-image.jpg" /> */}
-              {/* {props.userId} */}
-
-              <Link underline="none" component={RouterLink} to="/">
-                <Button style={{ color: "#97CD80", fontWeight: "bold" }} onClick={logout}>LOG OUT</Button>
-              </Link>
+                <Link underline="none" component={RouterLink} to="/">
+                  <MenuItem onClick={logout}>Logout</MenuItem>
+                </Link>
+              </Menu>
             </>
-
           ) : (
               <>
                 <Link underline="none" component={RouterLink} to="/log-in">

@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(7),
   },
   card: {
     height: '100%',
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
+    backgroundSize: 'contain',
   },
   cardContent: {
     flexGrow: 1,
@@ -88,20 +89,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Plants() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
+  const [search, setSearch] = useState('');
   // Fetch plants from backend
   // https://reactjs.org/docs/hooks-intro.html
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
-      const result = await fetch("/plants");
+      
+//  const result = await fetch("/plants");
+      const result = await fetch("http://localhost:5000/plants/?gt=1");
       const data = await result.json();
       setPlants(data);
     }
     fetchPlants();
   }, []);
 
+  function filterSearch(plant) {
+    // Either return true if you want the plant to be shown or otherwise false.
+    if (plant.common_name.toUpperCase().includes(search.toUpperCase())) {
+      return true;
+    }
+    return false;
+  }
+
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
@@ -113,9 +125,13 @@ export default function Plants() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Find plants and learn to care. Plants for beginners and more!
             </Typography>
+
+            {/* need to search for the plant */}
             <div style={{ textAlign: "center" }}>
               <SearchIcon />
               <InputBase
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search…"
                 classes={{
                   root: classes.inputRoot,
@@ -124,17 +140,18 @@ export default function Plants() {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </div>
+
           </Container>
 
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {plants.map((plant) => (
+            {plants.filter(filterSearch).map((plant) => (
               <Grid item key={plant.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
+                    image={plant.growtherapy.image_url}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
@@ -151,11 +168,10 @@ export default function Plants() {
 
                   </CardContent>
                   <CardActions>
-
-                    <Link component={RouterLink} to="/plant-view">
+                    <Link component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
                         View
-                    </Button>
+                      </Button>
                     </Link>
 
                     <Button size="small" color="primary">
@@ -175,7 +191,7 @@ export default function Plants() {
         </Typography>
         <Copyright />
       </footer>
-    </React.Fragment>
+    </>
   );
 }
 
