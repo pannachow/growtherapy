@@ -5,7 +5,7 @@ const TrefleApi = require('../helpers/TrefleApi');
 
 
 // Properties to keep from Trefle plant object
-const PLANT_KEYS = ['id', 'common_name', 'slug', 'scientific_name', 'family', 'native', 'year'];
+const PLANT_KEYS = ['id', 'image_url', 'common_name', 'slug', 'scientific_name', 'family', 'native', 'year'];
 
 /**********************************************************
  * Helper Functions
@@ -32,37 +32,38 @@ function trimPlants(plants) {
  **/
 
 async function addGtFields(trimmed) {
-    // Get the IDs of all "trimmed" plants
-    let ids = trimmed.map((p) => p.id);
-    // Create SQL to SELECT those IDs
-    let sql = `
-        SELECT * FROM plant_data 
-        WHERE trefle_plant_id IN (${ids.join(',')});
-    `;
-    console.log(sql);
+  console.log('trimmed: ', trimmed)
+  // Get the IDs of all "trimmed" plants
+  let ids = trimmed.map((p) => p.id);
+  // Create SQL to SELECT those IDs
+  let sql = `
+      SELECT * FROM plant_data 
+      WHERE trefle_plant_id IN (${ids.join(',')});
+  `;
+  console.log('sql:', sql);
+  // let trimmedWithGt = [ ...trimmed ];  // copy trimmed array
+  let trimmedWithGt = [];
+  try {
+      let results = await db(sql);
+      let rows = results.data;
+      console.log('rows:', rows.length);
+      // If any GT data was found, add it to trimmed plants
+      trimmed.forEach((p) => {
+          // Get index of GT data in rows (if it exists)
+          let gtIx = rows.findIndex((gt) => p.id === gt.trefle_plant_id);
+          if (gtIx > -1) {
+              //if extra plant data found, add it
 
-    let trimmedWithGt = [ ...trimmed ];  // copy trimmed array
-    try {
-        let results = await db(sql);
-        let rows = results.data;
-        console.log(results.data);
-        // If any GT data was found, add it to trimmed plants
-        if (rows.length > 0) {
-            trimmedWithGt.forEach((p) => {
-                // Get index of GT data in rows (if it exists)
-                let gtIx = rows.findIndex((gt) => p.id === gt.trefle_plant_id);
-                if (gtIx === -1) {
-                    p.growtherapy = null;  // no GT data found
-                } else {
-                    p.growtherapy = rows[gtIx];  // add GT data to trimmed plant obj
-                }
-            });
-        }
-    } catch (err) {
-        console.log('addGtFields() error:', err);
-    }
-
-    return trimmedWithGt;
+              p.growtherapy = rows[gtIx];  // add GT data to trimmed plant obj
+              //push on trimmedWithGT []
+              trimmedWithGt.push(p);
+          }
+      });
+  } catch (err) {
+      console.log('addGtFields() error:', err);
+  }
+  console.log('withGT: ', trimmedWithGt);
+  return trimmedWithGt;
 }
 
 // async function plantExist(id) {
