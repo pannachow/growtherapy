@@ -39,7 +39,7 @@ async function emailExists(email) {
 **/
 
 router.get('/', async function(req, res, next) {
-    let sql = 'SELECT email, password FROM users ORDER BY email';
+    let sql = 'SELECT * FROM users ORDER BY id';
     try {
         let results = await db(sql);
         res.send(results.data);
@@ -126,5 +126,29 @@ router.get('/:userId/profile', ensureSameUser, async function(req, res, next) {
   }
 });
 
+
+/**
+ * Delete a user by id
+ */
+
+ router.delete('/:userId', async (req, res) => {
+    let id = req.params.userId;
+    // Check for 404
+    if ((await userExists(id)) === false) {
+        res.status(404).send({ error: "Not Found" });
+        return;
+    }
+
+    let sql = `DELETE FROM users WHERE id = ${id}`;
+
+    try {
+        let response = await db(sql); // DELETE
+        // return all users
+        response = await db("SELECT * FROM users ORDER BY id ASC;");
+        res.send(response.data);
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+ });
 
 module.exports = router;
