@@ -9,13 +9,16 @@ import {
 
 import Auth from './helpers/Auth';
 import Api from './helpers/Api';
+
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
+
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Plants from "./components/Plants";
 import FAQ from "./components/FAQ";
 import ContactUs from "./components/ContactUs";
+
 import Login from "./components/Login";
 import ProfileView from './components/ProfileView';
 import ErrorView from './components/ErrorView';
@@ -64,7 +67,7 @@ class App extends React.Component {
   }
 
   async doSignUp(newFirstName, newLastName, newEmail, newPassword) {
-    let newUser = { firstname: newFirstName, lastname: newLastName, email: newEmail, password: newPassword };
+    let newUser = { first_name: newFirstName, last_name: newLastName, email: newEmail, password: newPassword };
     console.log(newUser);
     let options = {
       method: "POST",
@@ -80,8 +83,9 @@ class App extends React.Component {
         console.log('Registration failed', response.status, response.statusText);
       }
     } catch (err) {
-      console.log("Exception:", err.message);
+      console.log("Registration failed:", err.message);
     }
+    this.props.history.push('/log-in');
   }
 
   render() {
@@ -126,8 +130,12 @@ class App extends React.Component {
               exact
               component={ProfileView}
             />
-            
-            <Route path="/plant-view/:id" exact>
+
+            {/* <PrivateRoute path="/secret" exact>
+              <SecretView />
+            </PrivateRoute> */}
+
+            <Route path="/plant-view" exact>
               <PlantView />
             </Route>
 
