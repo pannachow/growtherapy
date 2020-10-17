@@ -38,7 +38,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: Auth.getUserId(),
       loginError: ''
     }
   }
