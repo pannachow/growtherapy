@@ -152,7 +152,7 @@ export default function Album() {
 
                   </CardContent>
                   <CardActions>
-                    <Link component={RouterLink} to={`/plant-view/${plant.id}`}>
+                    <Link underline="none" component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
                         View
                       </Button>
