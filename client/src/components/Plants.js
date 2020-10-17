@@ -40,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(7),
   },
   card: {
     height: '100%',
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
+    backgroundSize: 'contain',
   },
   cardContent: {
     flexGrow: 1,
@@ -72,7 +73,11 @@ export default function Album() {
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
-      const result = await fetch('http://localhost:5000/plants');
+
+      
+//  const result = await fetch("/plants");
+      const result = await fetch("http://localhost:5000/plants/?gt=1");
+
       const data = await result.json();
       setPlants(data);
     }
@@ -128,8 +133,10 @@ export default function Album() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image= {plant.image_url} //"https://source.unsplash.com/random"
-                    title={plant.common_name}
+
+                    image={plant.growtherapy.image_url}
+                    title="Image title"
+
                   />
                   <CardContent className={classes.cardContent}>
 

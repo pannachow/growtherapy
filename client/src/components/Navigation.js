@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from "react-router";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +9,7 @@ import SideDrawer from './SideDrawer';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
+import UserMenu from './UserMenu';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,11 +37,6 @@ function Navigation(props) {
     setState({ ...state, open: open });
   };
 
-  function logout() {
-    props.doLogout();
-    props.history.push('/');
-  }
-
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -56,20 +51,7 @@ function Navigation(props) {
           </Link>
 
           {props.userId ? (
-            <>
-              <Link underline="none" component={RouterLink} to="/secret">
-                <Button style={{ color: "#97CD80", fontWeight: "bold" }}>My Plants</Button>
-              </Link>
-
-              <Link underline="none" component={RouterLink} to={`/users/${props.userId}/profile`}>
-              <Button style={{ color: "#97CD80", fontWeight: "bold" }}>Profile</Button>
-              </Link>
-
-              <Link underline="none" component={RouterLink} to="/">
-                <Button style={{ color: "#97CD80", fontWeight: "bold" }} onClick={logout}>LOG OUT</Button>
-              </Link>
-            </>
-
+            <UserMenu doLogout={props.doLogout} userId={props.userId} />
           ) : (
               <>
                 <Link underline="none" component={RouterLink} to="/log-in">
@@ -89,4 +71,4 @@ function Navigation(props) {
   );
 }
 
-export default withRouter(Navigation);
+export default Navigation;

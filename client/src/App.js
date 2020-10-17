@@ -9,18 +9,14 @@ import {
 
 import Auth from './helpers/Auth';
 import Api from './helpers/Api';
-
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
-
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
 import Plants from "./components/Plants";
 import FAQ from "./components/FAQ";
 import ContactUs from "./components/ContactUs";
-
 import Login from "./components/Login";
-import SecretView from './components/SecretView';
 import ProfileView from './components/ProfileView';
 import ErrorView from './components/ErrorView';
 import SignUp from "./components/SignUp";
@@ -43,7 +39,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: Auth.getUserId(),
       loginError: ''
     }
   }
@@ -66,7 +62,27 @@ class App extends React.Component {
     this.props.history.push('/');
   }
 
-
+  async doSignUp(newFirstName, newLastName, newEmail, newPassword) {
+    let newUser = { first_name: newFirstName, last_name: newLastName, email: newEmail, password: newPassword };
+    console.log(newUser);
+    let options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newUser)
+    };
+    
+    try {
+      let response = await fetch('/users/register', options);
+      if (response.ok) {
+        console.log("Registration succeeded");
+      } else {
+        console.log('Registration failed', response.status, response.statusText);
+      }
+      return response.ok;
+    } catch (err) {
+      console.log("Exception:", err.message);
+    }
+  }
 
 
   render() {
@@ -102,7 +118,8 @@ class App extends React.Component {
             </Route>
 
             <Route path="/sign-up" exact>
-              <SignUp />
+              <SignUp
+                register={(f, l, e, p) => this.doSignUp(f, l, e, p)} />
             </Route>
 
             <PrivateRoute
@@ -110,11 +127,7 @@ class App extends React.Component {
               exact
               component={ProfileView}
             />
-
-            <PrivateRoute path="/secret" exact>
-              <SecretView />
-            </PrivateRoute>
-
+            
             <Route path="/plant-view/:id" exact>
               <PlantView />
             </Route>

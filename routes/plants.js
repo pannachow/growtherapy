@@ -21,6 +21,10 @@ function trimPlants(plants) {
         for (let key of PLANT_KEYS) {
             tpobj[key] = pobj[key];
         }
+        //no common_name in the data then use scientific_name
+        if (tpobj.common_name === null){
+            tpobj.common_name = tpobj.scientific_name;
+        }
         return tpobj;
     });
     return trimmed;
