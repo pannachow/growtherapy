@@ -23,8 +23,6 @@ import SignUp from "./components/SignUp";
 import PlantView from "./components/PlantView";
 import './App.css';
 
-// import TrefleApi from './helpers/TrefleApi';
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -40,7 +38,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: Auth.getUserId(),
       loginError: ''
     }
   }
@@ -64,7 +62,7 @@ class App extends React.Component {
   }
 
   async doSignUp(newFirstName, newLastName, newEmail, newPassword) {
-    let newUser = { firstname: newFirstName, lastname: newLastName, email: newEmail, password: newPassword };
+    let newUser = { first_name: newFirstName, last_name: newLastName, email: newEmail, password: newPassword };
     console.log(newUser);
     let options = {
       method: "POST",
@@ -79,6 +77,7 @@ class App extends React.Component {
       } else {
         console.log('Registration failed', response.status, response.statusText);
       }
+      return response.ok;
     } catch (err) {
       console.log("Exception:", err.message);
     }
