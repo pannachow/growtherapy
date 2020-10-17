@@ -5,7 +5,7 @@ const TrefleApi = require('../helpers/TrefleApi');
 
 
 // Properties to keep from Trefle plant object
-const PLANT_KEYS = ['id', 'common_name', 'slug', 'scientific_name', 'family', 'native', 'year'];
+const PLANT_KEYS = ['id', 'image_url', 'common_name', 'slug', 'scientific_name', 'family', 'native', 'year'];
 
 /**********************************************************
  * Helper Functions

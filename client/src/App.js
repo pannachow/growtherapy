@@ -23,6 +23,7 @@ import SignUp from "./components/SignUp";
 import PlantView from "./components/PlantView";
 import './App.css';
 
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -83,6 +84,7 @@ class App extends React.Component {
     }
   }
 
+
   render() {
     return (
       <ThemeProvider theme={theme}>
@@ -98,7 +100,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/plants" exact>
-              <Plants />
+                <Plants />
             </Route>
 
             <Route path="/FAQ" exact>

@@ -55,7 +55,7 @@ CREATE TABLE users_plants (
 
 INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, notes)
     VALUES 
-    -- Sansevieria trifasciata
+    -- Sansevieria trifasciata *
     ('https://cdn.shopify.com/s/files/1/0012/9472/9282/products/little_leaf_web_snake_plant_1150x1150.jpg?v=1554229767',
     1258091, 1, 2, 'Allow soil to completely dry out in between waterings – this plant is prone to rot if overwatered.'),
 
@@ -83,7 +83,7 @@ INSERT INTO plant_data (image_url, trefle_plant_id, light_needs, water_needs, no
     ('https://www.mydomaine.com/thmb/-qUavq1qP_46GUo4-ufXAES8RRc=/2121x1414/filters:fill(auto,1)/GettyImages-671324024-738bc918590d4bd6935b6622e9385ca1.jpg',
     123796, 3, 2, 'Water thoroughly when soil is completely dry'),
 
-    -- Aloe Vera
+    -- Aloe Vera *
     ('https://cdn.shopify.com/s/files/1/0025/8159/4230/products/3e8077490855372b69b03077f914441a_1188x1856.jpg?v=1595340563',
     103926, 3, 2, 'Water thoroughly when soil is completely dry'),
 
