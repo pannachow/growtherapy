@@ -1,5 +1,6 @@
 import React from 'react';
 import Api from '../helpers/Api';
+import Auth from '../helpers/Auth';
 import ErrorView from './ErrorView';
 import FaceIcon from '@material-ui/icons/Face';
 import Paper from '@material-ui/core/Paper';
@@ -13,13 +14,19 @@ class ProfileView extends React.Component {
     this.state = {
       user: null,
       statusCode: 0,
-      statusText: ''
+      statusText: '',
+      plants: []
     };
   }
 
   async componentDidMount() {
-    let userId = this.props.match.params.userId;
-    let response = await Api.request('GET', `/users/${userId}/profile`);
+    await this.getProfile();
+    await this.getPlants();
+  }
+
+  async getProfile() {
+    const userId = Auth.getUserId();
+    const response = await Api.request('GET', `/users/${userId}/profile`);
     if (response.ok) {
       this.setState({
         user: response.data,
@@ -33,6 +40,14 @@ class ProfileView extends React.Component {
         statusText: response.statusText
       });
     }
+  }
+
+  async getPlants() {
+    const userId = Auth.getUserId();
+    const response = await Api.request('GET', `/users/${userId}/favorites`);
+    this.setState({
+      plants: response.data
+    });
   }
 
   render() {
@@ -79,12 +94,11 @@ class ProfileView extends React.Component {
         <Container>
         <div style={classes.root}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <Paper style={classes.paper}>Plant 1</Paper>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Paper style={classes.paper}>Plant 2</Paper>
-            </Grid>
+            {this.state.plants.map((plant) =>
+              <Grid item xs={12} sm={6}>
+                <Paper style={classes.paper}>Plant</Paper>
+              </Grid>
+            )}
           </Grid>
         </div>
         </Container>
