@@ -51,14 +51,14 @@ const useStyles = makeStyles((theme) => ({
 function SignUp(props) {
 
   const classes = useStyles();
-  const [firstname, setFirstName] = useState('');
-  const [lastname, setLastName] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
   async function handleSubmit2(event) {
     event.preventDefault();
-    const ok = await props.register(firstname, lastname, email, password);
+    const ok = await props.register(first_name, last_name, email, password);
     if (ok) {
       setFirstName("");
       setLastName("");
@@ -91,12 +91,12 @@ function SignUp(props) {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstame"
+                autoComplete="first_name"
+                name="first_name"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="first_name"
                 label="First Name"
                 autoFocus
                 onChange={(e) => setFirstName(e.target.value)}
@@ -107,10 +107,10 @@ function SignUp(props) {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
+                id="last_name"
                 label="Last Name"
-                name="lastName"
-                autoComplete="lname"
+                name="last_name"
+                autoComplete="last_name"
                 onChange={(e) => setLastName(e.target.value)}
               />
             </Grid>
