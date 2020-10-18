@@ -33,6 +33,26 @@ async function emailExists(email) {
     return exists;
 }
 
+async function getUsersPlants() {
+    let response = null;
+    try {
+        response = await db("SELECT * FROM users_plants");
+    } catch (err) {}
+        return response;
+}
+
+// Prevent users from adding the same plant to theirprofile.
+
+async function plantExists(plant_id) {
+    let exists = false;
+    try {
+        let response = await db(`SELECT * FROM users_plants WHERE plant_id = ${plant_id}`);
+        if (response.data === 1) {
+            exists = true;
+        }
+    } catch (err) {}
+    return exists;
+}
 
 /**
 * Get all users
@@ -126,6 +146,83 @@ router.get('/:userId/profile', ensureSameUser, async function(req, res, next) {
   }
 });
 
+/**
+ * Delete a user by id
+ */
+
+router.delete('/:userId', async (req, res) => {
+    let id = req.params.userId;
+    // Check for 404
+    if ((await userExists(id)) === false) {
+        res.status(404).send({ error: "Not Found" });
+        return;
+    }
+
+    let sql = `DELETE FROM users WHERE id = ${id}`;
+
+    try {
+        let response = await db(sql); // DELETE
+        // return all users
+        response = await db("SELECT * FROM users ORDER BY id ASC;");
+        res.send(response.data);
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+ });
+
+ /**
+ * Get plants added by the user
+ */
+
+router.get('/:userId/favorites', ensureSameUser, async (req, res, next) => {
+    let { userId } = req.params;
+    let sql = 'SELECT plant_id FROM users_plants WHERE user_id = ' + userId;
+
+    try {
+        let response = await db(sql);
+        res.send(response.data);
+    } catch (err) {
+        next(err);
+    }
+});
+
+// Add plants to user's profile
+
+router.post('/:userId/favorites', ensureSameUser, async (req, res, next) => {
+    let { user_id, plant_id } = req.body;
+    
+    let sql = `INSERT INTO users_plants (user_id, plant_id) VALUES (${user_id}, ${plant_id})`;
+
+    if ((await plantExists(plant_id)) === true) {
+        res.status(400).send({ message: 'Plant already exists.'});
+        return;
+    }
+    
+    try {
+        let response = await db(sql);
+        response = await db('SELECT plant_id FROM users_plants WHERE user_id = ' + user_id);
+        res.status(201).send(response.data);
+    } catch (err) {
+        res.status(500).send({ error: err.statusText });
+    }
+});
+
+// Delete plants from user's profile
+
+router.delete('/:userId/favorites/:plantId', ensureSameUser, async (req, res, next) => {
+    let plant_id = req.params.plantId;
+
+    let sql = `DELETE FROM users_plants WHERE plant_id = ${plant_id}`;
+
+    try {
+        let response = await db(sql); // DELETE
+        // return all plants on the user's profile
+        response = await getUsersPlants();
+        res.send(response.data);
+    } catch (err) {
+        res.status(500).send({ error: err });
+    }
+});
 
 /**
  * Delete a user by id

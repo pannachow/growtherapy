@@ -59,34 +59,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: "url(plants_footer.jpg)",
     padding: theme.spacing(6),
   },
-  search: {
-    position: 'center',
-    borderRadius: theme.shape.borderRadius,
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(${theme.spacing(1)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
 }));
 
-export default function Plants() {
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+
+export default function Album() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
   const [search, setSearch] = useState('');
@@ -95,14 +73,17 @@ export default function Plants() {
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
+
       
 //  const result = await fetch("/plants");
       const result = await fetch("http://localhost:5000/plants/?gt=1");
+
       const data = await result.json();
       setPlants(data);
     }
     fetchPlants();
   }, []);
+  
 
   function filterSearch(plant) {
     // Either return true if you want the plant to be shown or otherwise false.
@@ -138,6 +119,7 @@ export default function Plants() {
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+
               />
             </div>
 
@@ -151,8 +133,10 @@ export default function Plants() {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
+
                     image={plant.growtherapy.image_url}
                     title="Image title"
+
                   />
                   <CardContent className={classes.cardContent}>
 
@@ -168,7 +152,7 @@ export default function Plants() {
 
                   </CardContent>
                   <CardActions>
-                    <Link component={RouterLink} to={`/plant-view/${plant.id}`}>
+                    <Link underline="none" component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
                         View
                       </Button>

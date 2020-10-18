@@ -26,7 +26,6 @@ import SignUp from "./components/SignUp";
 import PlantView from "./components/PlantView";
 import './App.css';
 
-// import TrefleApi from './helpers/TrefleApi';
 
 const theme = createMuiTheme({
   palette: {
@@ -43,7 +42,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: '',
+      userId: Auth.getUserId(),
       loginError: ''
     }
   }
@@ -82,11 +81,13 @@ class App extends React.Component {
       } else {
         console.log('Registration failed', response.status, response.statusText);
       }
+      return response.ok;
     } catch (err) {
       console.log("Registration failed:", err.message);
     }
     this.props.history.push('/log-in');
   }
+
 
   render() {
     return (
@@ -103,7 +104,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/plants" exact>
-              <Plants />
+                <Plants />
             </Route>
 
             <Route path="/FAQ" exact>

@@ -71,7 +71,7 @@ class ProfileView extends React.Component {
         <img src="/background-1.jpg" alt="background" style={background} />
 
         <div style={{ textAlign: "center" }}>
-          <FaceIcon style={{ fontSize: 100, color: "#689875", marginTop: 50 }} />
+          <FaceIcon style={{ fontSize: 80, color: "#689875", marginTop: 50 }} />
           <h1 style={{ color: "#689875", fontWeight: "bold" }} >Welcome back, {u.first_name}!</h1>
           <h3 style={{ color: "#689875", fontWeight: "bold", marginBottom: 50  }} >Email: {u.email}</h3>
         </div>
