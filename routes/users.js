@@ -33,21 +33,22 @@ async function emailExists(email) {
     return exists;
 }
 
-async function getUsersPlants() {
-    let response = null;
-    try {
-        response = await db("SELECT * FROM users_plants");
-    } catch (err) {}
-        return response;
-}
+// async function getUsersPlants(user_id, plant_id) {
+
+//     let response = null;
+//     try {
+//         response = await db(`SELECT * FROM users_plants WHERE user_id = ${user_id} AND plant_id = ${plant_id}`);
+//     } catch (err) {}
+//         return response;
+// }
 
 // Prevent users from adding the same plant to theirprofile.
 
-async function plantExists(plant_id) {
+async function plantExists(user_id, plant_id) {
     let exists = false;
     try {
-        let response = await db(`SELECT * FROM users_plants WHERE plant_id = ${plant_id}`);
-        if (response.data === 1) {
+        let response = await db(`SELECT plant_id FROM users_plants WHERE user_id = ${user_id} AND plant_id = ${plant_id}`);
+        if (response.data.length === 1) {
             exists = true;
         }
     } catch (err) {}
@@ -175,8 +176,8 @@ router.delete('/:userId', async (req, res) => {
  */
 
 router.get('/:userId/favorites', ensureSameUser, async (req, res, next) => {
-    let { userId } = req.params;
-    let sql = 'SELECT plant_id FROM users_plants WHERE user_id = ' + userId;
+    
+    let sql = 'SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id';
 
     try {
         let response = await db(sql);
@@ -189,18 +190,19 @@ router.get('/:userId/favorites', ensureSameUser, async (req, res, next) => {
 // Add plants to user's profile
 
 router.post('/:userId/favorites', ensureSameUser, async (req, res, next) => {
+
     let { user_id, plant_id } = req.body;
     
     let sql = `INSERT INTO users_plants (user_id, plant_id) VALUES (${user_id}, ${plant_id})`;
-
-    if ((await plantExists(plant_id)) === true) {
+    console.log(sql)
+    if ((await plantExists(user_id, plant_id)) === true) {
         res.status(400).send({ message: 'Plant already exists.'});
         return;
     }
     
     try {
         let response = await db(sql);
-        response = await db('SELECT plant_id FROM users_plants WHERE user_id = ' + user_id);
+        response = await db(`SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id`);
         res.status(201).send(response.data);
     } catch (err) {
         res.status(500).send({ error: err.statusText });
@@ -209,15 +211,17 @@ router.post('/:userId/favorites', ensureSameUser, async (req, res, next) => {
 
 // Delete plants from user's profile
 
-router.delete('/:userId/favorites/:plantId', ensureSameUser, async (req, res, next) => {
-    let plant_id = req.params.plantId;
+router.delete('/:userId/favorites/:plant_id', ensureSameUser, async (req, res, next) => {
 
-    let sql = `DELETE FROM users_plants WHERE plant_id = ${plant_id}`;
+    let { plant_id } = req.params;
+    let { user_id } = req.body;
+
+    let sql = `DELETE FROM users_plants WHERE user_id = ${user_id} AND plant_id = ${plant_id}`;
 
     try {
         let response = await db(sql); // DELETE
         // return all plants on the user's profile
-        response = await getUsersPlants();
+        response = await db(`SELECT * FROM users_plants WHERE user_id = ${user_id}`);
         res.send(response.data);
     } catch (err) {
         res.status(500).send({ error: err });
