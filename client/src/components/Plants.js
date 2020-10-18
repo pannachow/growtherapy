@@ -13,6 +13,7 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import Auth from '../helpers/Auth';
 
 
 function Copyright() {
@@ -61,10 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-
-export default function Album() {
+export default function Plants() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
   const [search, setSearch] = useState('');
@@ -73,9 +71,6 @@ export default function Album() {
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
-
-      
-//  const result = await fetch("/plants");
       const result = await fetch("http://localhost:5000/plants/?gt=1");
 
       const data = await result.json();
@@ -83,7 +78,7 @@ export default function Album() {
     }
     fetchPlants();
   }, []);
-  
+
 
   function filterSearch(plant) {
     // Either return true if you want the plant to be shown or otherwise false.
@@ -91,6 +86,21 @@ export default function Album() {
       return true;
     }
     return false;
+  }
+
+  async function addPlant(userId, plantId) {
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": Auth.getToken()
+      },
+      body: JSON.stringify({
+        "user_id": userId,
+        "plant_id": plantId
+      })
+    };
+    await fetch(`http://localhost:5000/users/${userId}/favorites`, options);
   }
 
   return (
@@ -158,9 +168,12 @@ export default function Album() {
                       </Button>
                     </Link>
 
-                    <Button size="small" color="primary">
-                      Add
-                    </Button>
+                    {Auth.getUserId() ? (
+                      <Button size="small" color="primary" onClick={() => addPlant(Auth.getUserId(), plant.growtherapy.id)} >
+                        Add
+                      </Button>
+                    ) : <></>}
+
                   </CardActions>
                 </Card>
               </Grid>

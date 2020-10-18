@@ -20,7 +20,7 @@ class Auth {
     }
     
     static getUserId() {
-        return ('userId' in localStorage) ? localStorage.userId : '';
+        return ('userId' in localStorage) ? Number(localStorage.userId) : null;
     }
 
 }
