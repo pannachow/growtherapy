@@ -176,10 +176,9 @@ router.delete('/:userId', async (req, res) => {
  */
 
 router.get('/:userId/favorites', ensureSameUser, async (req, res, next) => {
-
-    let {user_id} = req.body;
+    let { userId } = req.params;
     
-    let sql = `SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id WHERE user_id = ${user_id}`;
+    let sql = `SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id WHERE user_id = ${userId}`;
     
     try {
         let response = await db(sql);
