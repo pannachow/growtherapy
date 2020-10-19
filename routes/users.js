@@ -33,14 +33,14 @@ async function emailExists(email) {
     return exists;
 }
 
-// async function getUsersPlants(user_id, plant_id) {
+async function getUsersPlants(user_id) {
 
-//     let response = null;
-//     try {
-//         response = await db(`SELECT * FROM users_plants WHERE user_id = ${user_id} AND plant_id = ${plant_id}`);
-//     } catch (err) {}
-//         return response;
-// }
+    let response = null;
+    try {
+        response = await db(`SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id WHERE user_id = ${user_id}`);
+    } catch (err) {}
+        return response;
+}
 
 // Prevent users from adding the same plant to theirprofile.
 
@@ -176,9 +176,11 @@ router.delete('/:userId', async (req, res) => {
  */
 
 router.get('/:userId/favorites', ensureSameUser, async (req, res, next) => {
-    
-    let sql = 'SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id';
 
+    let {user_id} = req.body;
+    
+    let sql = `SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id WHERE user_id = ${user_id}`;
+    
     try {
         let response = await db(sql);
         res.send(response.data);
@@ -202,7 +204,7 @@ router.post('/:userId/favorites', ensureSameUser, async (req, res, next) => {
     
     try {
         let response = await db(sql);
-        response = await db(`SELECT plant_data.*, users.id as user_id FROM plant_data INNER JOIN users_plants ON plant_data.id = users_plants.plant_id INNER JOIN users ON users.id = users_plants.user_id`);
+        response = await getUsersPlants(user_id);
         res.status(201).send(response.data);
     } catch (err) {
         res.status(500).send({ error: err.statusText });
@@ -221,7 +223,7 @@ router.delete('/:userId/favorites/:plant_id', ensureSameUser, async (req, res, n
     try {
         let response = await db(sql); // DELETE
         // return all plants on the user's profile
-        response = await db(`SELECT * FROM users_plants WHERE user_id = ${user_id}`);
+        response = await getUsersPlants(user_id);
         res.send(response.data);
     } catch (err) {
         res.status(500).send({ error: err });
