@@ -6,6 +6,8 @@ import FaceIcon from '@material-ui/icons/Face';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from "react-router-dom";
 
 class ProfileView extends React.Component {
 
@@ -74,7 +76,7 @@ class ProfileView extends React.Component {
         flexGrow: 1,
       },
       paper: {
-        padding: '100px',
+        padding: '20px',
         textAlign: 'center',
         color: '#689875',
       },
@@ -88,19 +90,23 @@ class ProfileView extends React.Component {
         <div style={{ textAlign: "center" }}>
           <FaceIcon style={{ fontSize: 80, color: "#689875", marginTop: 50 }} />
           <h1 style={{ color: "#689875", fontWeight: "bold" }} >Welcome back, {u.first_name}!</h1>
-          <h3 style={{ color: "#689875", fontWeight: "bold", marginBottom: 50  }} >Email: {u.email}</h3>
+          <h3 style={{ color: "#689875", fontWeight: "bold", marginBottom: 50 }} >Email: {u.email}</h3>
         </div>
 
         <Container>
-        <div style={classes.root}>
-          <Grid container spacing={3}>
-            {this.state.plants.map((plant) =>
-              <Grid item xs={12} sm={6}>
-                <Paper style={classes.paper}>Plant</Paper>
-              </Grid>
-            )}
-          </Grid>
-        </div>
+          <div style={classes.root}>
+            <Grid container spacing={4}>
+              {this.state.plants.map((plant) =>
+                <Grid item sm={4}>
+                  <Link underline="none" component={RouterLink} to={`/plant-view/${plant.trefle_plant_id}`}>
+                    <Paper style={classes.paper}>
+                      <img src={plant.image_url} width="100%" height="100%" alt="plant-photos"></img>
+                    </Paper>
+                  </Link>
+                </Grid>
+              )}
+            </Grid>
+          </div>
         </Container>
 
       </div>
