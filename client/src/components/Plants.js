@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
   },
   cardContent: {
     flexGrow: 1,
@@ -86,6 +86,28 @@ export default function Plants() {
       return true;
     }
     return false;
+  }
+
+  function showLightIcon(light_needs) {
+    if (light_needs === 3) {
+      return <img src='./light_3.png' alt='Full direct sunlight.' width='100px'/>;
+    } if (light_needs === 2) {
+      return <img src='./light_2.png' alt='Bright indirect sunlight.' width='100px'/>; 
+    } if (light_needs === 1) {
+      return <img src='./light_1.png' alt='Low to indirect sunlight.' width='100px'/>;
+    }
+    return '';
+  }
+
+  function showWaterIcon(water_needs) {
+    if (water_needs === 3) {
+      return <img src='./water_3.png' alt='Water thoroughly once a week.' width='65px' />;
+    } if (water_needs === 2) {
+      return <img src='./water_2.png' alt='Water thoroughly every 2 - 3 weeks.' width='65px' />; 
+    } if (water_needs === 1) {
+      return <img src='./water_1.png' alt='Water thoroughly once a month.' width='65px' />;
+    }
+    return '';
   }
 
   async function addPlant(userId, plantId) {
@@ -145,22 +167,22 @@ export default function Plants() {
                     className={classes.cardMedia}
 
                     image={plant.growtherapy.image_url}
-                    title="Image title"
+                    title={plant.common_name}
 
                   />
-                  <CardContent className={classes.cardContent}>
+                    <CardContent className={classes.cardContent}>
+                      {/* Fetch the back-end plant name here */}
+                      <Typography color="secondary" gutterBottom variant="h6" component="h2">
+                        {plant.common_name}
+                      </Typography>
 
-                    {/* Fetch the back-end plant name here */}
-                    <Typography color="secondary" gutterBottom variant="h5" component="h2">
-                      {plant.common_name}
-                    </Typography>
+                      {showLightIcon(plant.growtherapy.light_needs)}
 
-                    {/* Fetch the back-end plant content here */}
-                    <Typography color="textSecondary"> Scientific Name: <span style={{ color: "#009472" }}>{plant.scientific_name}</span> </Typography>
-                    <Typography color="textSecondary"> Family: <span style={{ color: "#009472" }}>{plant.family} </span> </Typography>
-                    <Typography color="textSecondary"> Year: <span style={{ color: "#009472" }}>{plant.year} </span> </Typography>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                  </CardContent>
+                      {showWaterIcon(plant.growtherapy.water_needs)}
+                    </CardContent>
+
                   <CardActions>
                     <Link underline="none" component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
