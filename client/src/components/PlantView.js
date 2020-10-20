@@ -63,42 +63,67 @@ class PlantView extends React.Component {
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", columnGap: "5px" }}>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
                 Name:
               </Typography>
-              <Typography color="secondary" variant="body1" style={{ fontSize: 20 }}>
+              
+              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
                 {plantData.common_name}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+                Botanical name:
+              </Typography>
+
+              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+                {plantData.scientific_name}
+              </Typography>
+
+              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
                 Family:
               </Typography>
-              <Typography color="secondary" variant="body1" style={{ fontSize: 20 }}>
+
+              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
                 {plantData.family}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+                Year:
+              </Typography>
+
+              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+                {plantData.year}
+              </Typography>
+
+              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+                Family:
+              </Typography>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+                {plantData.family}
+              </Typography>
+
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Water Needs:
               </Typography>
-              <Typography color="secondary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 15 }}>
                 {watering[plantData.growtherapy.water_needs]}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Light Needs:
               </Typography>
-              <Typography color="secondary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 15 }}>
                 {sunlight[plantData.growtherapy.light_needs]}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 20 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Notes:
               </Typography>
-              <Typography color="secondary" variant="body1"style={{ fontSize: 20 }}>
+              <Typography color="secondary" variant="body1"style={{ fontSize: 15 }}>
                 {plantData.growtherapy.notes}
               </Typography>
             </div>
-
+            
             {Auth.getUserId() ? (
               <Calendar schedule={wateringSchedule} />
             ) : <></>}

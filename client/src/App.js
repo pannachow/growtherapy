@@ -24,6 +24,7 @@ import ProfileView from './components/ProfileView';
 import ErrorView from './components/ErrorView';
 import SignUp from "./components/SignUp";
 import Message from "./components/Message";
+import WelcomeBack from "./components/WelcomeBack";
 import PlantView from "./components/PlantView";
 import './App.css';
 
@@ -86,7 +87,6 @@ class App extends React.Component {
     } catch (err) {
       console.log("Registration failed:", err.message);
     }
-    this.props.history.push('/log-in');
   }
 
 
@@ -135,6 +135,10 @@ class App extends React.Component {
 
             <Route path="/welcome" exact>
               <Message />
+            </Route>
+
+            <Route path="/welcome-back" exact>
+              <WelcomeBack />
             </Route>
 
             <Route path="/plant-view/:id" exact>

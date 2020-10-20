@@ -14,6 +14,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from "react-router-dom";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+
 
 function Copyright() {
   return (
@@ -70,7 +72,7 @@ function Login(props) {
     if (ok) {
       setEmail("");
       setPassword("");
-      props.history.push('/');
+      props.history.push('/users/:userId/profile');
     }
   }
 
@@ -89,8 +91,8 @@ function Login(props) {
               <div>{props.error}</div>
             )
           }
-          <form className={classes.form} onSubmit={handleSubmit}>
-            <TextField
+          <ValidatorForm className={classes.form} onSubmit={handleSubmit}>
+            <TextValidator
               variant="outlined"
               margin="normal"
               required
@@ -98,8 +100,10 @@ function Login(props) {
               id="email"
               label="Email Address"
               name="email"
-              autoComplete="email"
+              // autoComplete="email"
               value={email}
+              validators={ ['required', 'isEmail' ]}
+              errorMessages={[ 'this field is required', 'email is not valid' ]}
               onChange={(e) => setEmail(e.target.value)}
               autoFocus
             />
@@ -112,7 +116,7 @@ function Login(props) {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
+              // autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -139,7 +143,7 @@ function Login(props) {
             <Box mt={5}>
               <Copyright />
             </Box>
-          </form>
+          </ValidatorForm>
         </div>
       </Grid>
     </Grid>
