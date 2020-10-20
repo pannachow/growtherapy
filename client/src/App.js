@@ -23,6 +23,7 @@ import Login from "./components/Login";
 import ProfileView from './components/ProfileView';
 import ErrorView from './components/ErrorView';
 import SignUp from "./components/SignUp";
+import Message from "./components/Message";
 import PlantView from "./components/PlantView";
 import './App.css';
 
@@ -132,11 +133,11 @@ class App extends React.Component {
               component={ProfileView}
             />
 
-            {/* <PrivateRoute path="/secret" exact>
-              <SecretView />
-            </PrivateRoute> */}
+            <PrivateRoute path="/message" exact>
+              <Message />
+            </PrivateRoute>
 
-            <Route path="/plant-view" exact>
+            <Route path="/plant-view/:id" exact>
               <PlantView />
             </Route>
 

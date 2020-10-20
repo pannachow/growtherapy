@@ -59,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
 const background = {
   position: 'absolute',
   top: 100,
-  marginRight: '50%',
-  marginLeft: '30%',
   zIndex: -1,
+  width: '100%',
+  height: '80%'
 };
 
 export default function ContactUs() {

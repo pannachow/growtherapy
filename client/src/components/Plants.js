@@ -13,6 +13,7 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
+import Auth from '../helpers/Auth';
 
 
 function Copyright() {
@@ -49,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
-    backgroundSize: 'contain',
+    paddingTop: '100%', 
+    backgroundSize: 'cover',
   },
   cardContent: {
     flexGrow: 1,
@@ -61,10 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-
-export default function Album() {
+export default function Plants() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
   const [search, setSearch] = useState('');
@@ -73,9 +71,6 @@ export default function Album() {
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
-
-      
-//  const result = await fetch("/plants");
       const result = await fetch("http://localhost:5000/plants/?gt=1");
 
       const data = await result.json();
@@ -83,7 +78,7 @@ export default function Album() {
     }
     fetchPlants();
   }, []);
-  
+
 
   function filterSearch(plant) {
     // Either return true if you want the plant to be shown or otherwise false.
@@ -91,6 +86,43 @@ export default function Album() {
       return true;
     }
     return false;
+  }
+
+  function showLightIcon(light_needs) {
+    if (light_needs === 3) {
+      return <img src='./light_3.png' alt='Full direct sunlight.' width='100px'/>;
+    } if (light_needs === 2) {
+      return <img src='./light_2.png' alt='Bright indirect sunlight.' width='100px'/>; 
+    } if (light_needs === 1) {
+      return <img src='./light_1.png' alt='Low to indirect sunlight.' width='100px'/>;
+    }
+    return '';
+  }
+
+  function showWaterIcon(water_needs) {
+    if (water_needs === 3) {
+      return <img src='./water_3.png' alt='Water thoroughly once a week.' width='65px' />;
+    } if (water_needs === 2) {
+      return <img src='./water_2.png' alt='Water thoroughly every 2 - 3 weeks.' width='65px' />; 
+    } if (water_needs === 1) {
+      return <img src='./water_1.png' alt='Water thoroughly once a month.' width='65px' />;
+    }
+    return '';
+  }
+
+  async function addPlant(userId, plantId) {
+    let options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": Auth.getToken()
+      },
+      body: JSON.stringify({
+        "user_id": userId,
+        "plant_id": plantId
+      })
+    };
+    await fetch(`http://localhost:5000/users/${userId}/favorites`, options);
   }
 
   return (
@@ -135,22 +167,22 @@ export default function Album() {
                     className={classes.cardMedia}
 
                     image={plant.growtherapy.image_url}
-                    title="Image title"
+                    title={plant.common_name}
 
                   />
-                  <CardContent className={classes.cardContent}>
+                    <CardContent className={classes.cardContent}>
+                      {/* Fetch the back-end plant name here */}
+                      <Typography color="secondary" gutterBottom variant="h6" component="h2">
+                        {plant.common_name}
+                      </Typography>
 
-                    {/* Fetch the back-end plant name here */}
-                    <Typography color="secondary" gutterBottom variant="h5" component="h2">
-                      {plant.common_name}
-                    </Typography>
+                      {showLightIcon(plant.growtherapy.light_needs)}
 
-                    {/* Fetch the back-end plant content here */}
-                    <Typography color="textSecondary"> Scientific Name: <span style={{ color: "#009472" }}>{plant.scientific_name}</span> </Typography>
-                    <Typography color="textSecondary"> Family: <span style={{ color: "#009472" }}>{plant.family} </span> </Typography>
-                    <Typography color="textSecondary"> Year: <span style={{ color: "#009472" }}>{plant.year} </span> </Typography>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                  </CardContent>
+                      {showWaterIcon(plant.growtherapy.water_needs)}
+                    </CardContent>
+
                   <CardActions>
                     <Link underline="none" component={RouterLink} to={`/plant-view/${plant.id}`}>
                       <Button size="small" color="primary">
@@ -158,9 +190,12 @@ export default function Album() {
                       </Button>
                     </Link>
 
-                    <Button size="small" color="primary">
-                      Add
-                    </Button>
+                    {Auth.getUserId() ? (
+                      <Button size="small" color="primary" onClick={() => addPlant(Auth.getUserId(), plant.growtherapy.id)} >
+                        Add
+                      </Button>
+                    ) : <></>}
+
                   </CardActions>
                 </Card>
               </Grid>
