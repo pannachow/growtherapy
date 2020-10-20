@@ -64,7 +64,7 @@ function SignUp(props) {
       setLastName("");
       setEmail("");
       setPassword("");
-      props.history.push('/message');
+      props.history.push('/welcome');
     }
   }
 

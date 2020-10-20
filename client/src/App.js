@@ -133,9 +133,9 @@ class App extends React.Component {
               component={ProfileView}
             />
 
-            <PrivateRoute path="/message" exact>
+            <Route path="/welcome" exact>
               <Message />
-            </PrivateRoute>
+            </Route>
 
             <Route path="/plant-view/:id" exact>
               <PlantView />
