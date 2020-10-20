@@ -5,22 +5,9 @@ import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" style={{ color: "white" }} align="center">
-      {'Copyright © '}
-      <Link color="inherit" >
-        GROWTHERAPY
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const background = {
     position: 'absolute',
-    top: 50,
+    top: 70,
     width: '100%',
     zIndex: -1,
     opacity: 1,
@@ -32,10 +19,6 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
-    },
-    footer: {
-        backgroundImage: "url(plants_footer.jpg)",
-        padding: theme.spacing(6),
     }
   }));
 
@@ -46,9 +29,15 @@ function Message(props) {
             <img src="/plant-therapy.jpg" alt="background" style={background} />
                 <div style={{ textAlign: "center" }}>
                 <br />
-                <Typography variant="h5" align="center" style={{ color: "#97CD80", fontWeight: "bold" }} gutterBottom>
-                Registration complete! Welcome to Growtherapy
+                <Typography variant="h7" align="center" style={{ color: "green", fontWeight: "bold" }} gutterBottom>
+                Registration complete!
                 </Typography>
+                <br />
+                <br />
+                <Typography variant="h5" align="center" style={{ color: "#97CD80", fontWeight: "bold" }} gutterBottom>
+                "Let's root for each other and watch each other grow."
+                </Typography>
+
                 <br />
                 <Link underline="none" component={RouterLink} to="/log-in">
                     <Button variant="contained" color="primary" >LOG IN</Button>
