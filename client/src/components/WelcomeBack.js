@@ -12,30 +12,30 @@ const background = {
     opacity: 1,
   };
 
-function Message(props) {
+function WelcomeBack(props) {
         return(
             <div>
             <img src="/plant-therapy.jpg" alt="background" style={background} />
                 <div style={{ textAlign: "center" }}>
                 <br />
                 <Typography variant="h7" align="center" style={{ color: "green", fontWeight: "bold" }} gutterBottom>
-                Registration complete!
+                Hello, stranger. We missed you!
                 </Typography>
                 <br />
-                <br />
-                <Typography variant="h5" align="center" style={{ color: "#97CD80", fontWeight: "bold" }} gutterBottom>
-                "Let's root for each other and watch each other grow."
-                </Typography>
-
                 <br />
                 <Link underline="none" component={RouterLink} to="/log-in">
                     <Button variant="contained" color="primary" >LOG IN</Button>
                 </Link>
+                <br />
+                <br />
+
+                <Button size="small" color="primary">
+                    I forgot my password
+                </Button>
                 </div>
             </div>
         )
     }
     
 
-
-export default Message;
+export default WelcomeBack;

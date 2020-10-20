@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link as RouterLink } from "react-router-dom";
-
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 function Copyright() {
   return (
@@ -65,6 +65,8 @@ function SignUp(props) {
       setEmail("");
       setPassword("");
       props.history.push('/welcome');
+    } else {
+      props.history.push('/welcome-back')
     }
   }
 
@@ -87,7 +89,7 @@ function SignUp(props) {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} onSubmit={handleSubmit2}>
+        <ValidatorForm className={classes.form} onSubmit={handleSubmit2}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -115,27 +117,31 @@ function SignUp(props) {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextValidator
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
                 label="Email Address"
                 name="email"
-                autoComplete="email"
+                value={email}
+                id="email"
+                // autoComplete="email"
+                validators={ ['required', 'isEmail' ]}
+                errorMessages={[ 'this field is required', 'email is not valid' ]}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextValidator
                 variant="outlined"
                 required
                 fullWidth
                 name="password"
+                value={password}
+                id="password"
                 label="Password"
                 type="password"
-                id="password"
-                autoComplete="current-password"
+                // autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
@@ -163,7 +169,7 @@ function SignUp(props) {
               </Link>
             </Grid>
           </Grid>
-        </form>
+        </ValidatorForm>
       </div>
       <Box mt={5}>
         <Copyright />
