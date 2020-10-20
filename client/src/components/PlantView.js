@@ -63,43 +63,36 @@ class PlantView extends React.Component {
 
             <div style={{ display: "grid", gridTemplateColumns: "auto auto", columnGap: "5px" }}>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Name:
               </Typography>
               
-              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 15 }}>
                 {plantData.common_name}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Botanical name:
               </Typography>
 
-              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 15 }}>
                 {plantData.scientific_name}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Family:
               </Typography>
 
-              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 15 }}>
                 {plantData.family}
               </Typography>
 
-              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
                 Year:
               </Typography>
 
-              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
+              <Typography color="secondary" variant="body1" style={{ fontSize: 15 }}>
                 {plantData.year}
-              </Typography>
-
-              <Typography color="primary" variant="body1" style={{ fontSize: 18 }}>
-                Family:
-              </Typography>
-              <Typography color="secondary" variant="body1" style={{ fontSize: 18 }}>
-                {plantData.family}
               </Typography>
 
               <Typography color="primary" variant="body1" style={{ fontSize: 15 }}>
