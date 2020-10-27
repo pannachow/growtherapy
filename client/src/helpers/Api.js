@@ -1,15 +1,14 @@
-import Auth from './Auth';
+import Auth from "./Auth";
 
-
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = "http://localhost:5000";
 
 class Api {
 
     static async request(method, endpoint, body = null) {
         // Define basic options
-        let options = { 
+        const options = { 
             method: method,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { "Content-Type": "application/json" }
          };
 
         // Add body (if applicable)
@@ -18,9 +17,9 @@ class Api {
         }
 
         // Add JWT token (if exists)
-        let token = Auth.getToken();
+        const token = Auth.getToken();
         if (token) {
-            options.headers['x-access-token'] = token;
+            options.headers["x-access-token"] = token;
         }
 
         /**
@@ -42,7 +41,7 @@ class Api {
         try {
             response = await fetch(BASE_URL+endpoint, options);
             response.data = await response.json();
-            console.log('fetch response:', response);
+            console.log("fetch response:", response);
             if (!response.ok) {
                 // Use error message from JSON returned by server, else use fetch() error code/text
                 response.error = response.data.error || `${response.status}: ${response.statusText}`;

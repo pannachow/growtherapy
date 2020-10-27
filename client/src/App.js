@@ -1,5 +1,5 @@
-import React from 'react';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import React from "react";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import {
   BrowserRouter as Router,
   withRouter,
@@ -7,11 +7,11 @@ import {
   Route,
 } from "react-router-dom";
 
-import Auth from './helpers/Auth';
-import Api from './helpers/Api';
+import Auth from "./helpers/Auth";
+import Api from "./helpers/Api";
 
-import Navigation from './components/Navigation';
-import PrivateRoute from './components/PrivateRoute';
+import Navigation from "./components/Navigation";
+import PrivateRoute from "./components/PrivateRoute";
 
 import Home from "./components/Home";
 import AboutUs from "./components/AboutUs";
@@ -20,22 +20,22 @@ import FAQ from "./components/FAQ";
 import ContactUs from "./components/ContactUs";
 
 import Login from "./components/Login";
-import ProfileView from './components/ProfileView';
-import ErrorView from './components/ErrorView';
+import ProfileView from "./components/ProfileView";
+import ErrorView from "./components/ErrorView";
 import SignUp from "./components/SignUp";
 import Message from "./components/Message";
 import WelcomeBack from "./components/WelcomeBack";
 import PlantView from "./components/PlantView";
-import './App.css';
+import "./App.css";
 
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#013F2B',
+      main: "#013F2B",
     },
     secondary: {
-      main: '#009572',
+      main: "#009572",
     },
   },
 });
@@ -45,16 +45,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       userId: Auth.getUserId(),
-      loginError: ''
+      loginError: ""
     }
   }
 
   async doLogin(email, password) {
     const body = { email, password };
-    const response = await Api.request('POST', '/users/login', body);
+    const response = await Api.request("POST", "/users/login", body);
     if (response.ok) {
       Auth.loginUser(response.data.token, response.data.userId);
-      this.setState({ userId: response.data.userId, loginError: '' });
+      this.setState({ userId: response.data.userId, loginError: "" });
     } else {
       this.setState({ loginError: response.error });
     }
@@ -63,8 +63,8 @@ class App extends React.Component {
 
   doLogout() {
     Auth.logoutUser();
-    this.setState({ userId: '' });
-    this.props.history.push('/');
+    this.setState({ userId: "" });
+    this.props.history.push("/");
   }
 
   async doSignUp(newFirstName, newLastName, newEmail, newPassword) {
@@ -77,11 +77,11 @@ class App extends React.Component {
     };
     
     try {
-      let response = await fetch('/users/register', options);
+      let response = await fetch("/users/register", options);
       if (response.ok) {
         console.log("Registration succeeded");
       } else {
-        console.log('Registration failed', response.status, response.statusText);
+        console.log("Registration failed", response.status, response.statusText);
       }
       return response.ok;
     } catch (err) {

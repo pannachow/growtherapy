@@ -1,13 +1,13 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
 class AboutUs extends React.Component {
   render() {
     const background = {
-      position: 'absolute',
+      position: "absolute",
       top: 0,
-      width: '100%',
+      width: "100%",
       zIndex: -1,
     };
     return (

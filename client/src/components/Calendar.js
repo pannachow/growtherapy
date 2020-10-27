@@ -1,40 +1,40 @@
-import React, { useState } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import Tooltip from '@material-ui/core/Tooltip';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from "react";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import Tooltip from "@material-ui/core/Tooltip";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   back: {
-    float: 'left',
-    marginLeft: '2px',
-    marginTop: '2px',
+    float: "left",
+    marginLeft: "2px",
+    marginTop: "2px",
   },
   title: {
-    marginTop: '8px',
-    textAlign: 'center',
+    marginTop: "8px",
+    textAlign: "center",
   },
   forward: {
-    float: 'right',
-    marginRight: '2px',
-    marginTop: '2px',
+    float: "right",
+    marginRight: "2px",
+    marginTop: "2px",
   },
   circle: {
-      backgroundColor: theme.palette.secondary.main,
-      width: 21,
-      height: 21,
-      display: 'inline-block',
-      textAlign: 'center',
-      borderRadius: '50%',
+    backgroundColor: theme.palette.secondary.main,
+    width: 21,
+    height: 21,
+    display: "inline-block",
+    textAlign: "center",
+    borderRadius: "50%",
   },
 }));
 
@@ -58,7 +58,7 @@ export default function Calendar(props) {
       return (
         <Tooltip placement="top" title={text}>
           <div className={classes.circle}>
-            <span style={{color: "white"}}>{day}</span>
+            <span style={{ color: "white" }}>{day}</span>
           </div>
         </Tooltip>
       );
@@ -68,7 +68,7 @@ export default function Calendar(props) {
   }
 
   return (
-    <TableContainer component={Paper} style={{ width: '500px' }}>
+    <TableContainer component={Paper} style={{ width: "500px" }}>
       <IconButton size="medium" className={classes.back} onClick={() => setDate(previousMonth(date))}>
         <ArrowBackIcon />
       </IconButton>

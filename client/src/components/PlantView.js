@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import { withRouter } from "react-router-dom";
-import Container from '@material-ui/core/Container';
-import Calendar from './Calendar';
-import Typography from '@material-ui/core/Typography';
-import Auth from '../helpers/Auth';
+import Container from "@material-ui/core/Container";
+import Calendar from "./Calendar";
+import Typography from "@material-ui/core/Typography";
+import Auth from "../helpers/Auth";
 
 const sunlight = {
   1: "Low to indirect sunlight.",

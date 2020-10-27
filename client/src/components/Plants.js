@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-import Auth from '../helpers/Auth';
-
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import Auth from "../helpers/Auth";
 
 function Copyright() {
   return (
     <Typography variant="body2" style={{ color: "white" }} align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" >
         GROWTHERAPY
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -45,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(7),
   },
   card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   cardMedia: {
-    paddingTop: '100%', 
-    backgroundSize: 'cover',
+    paddingTop: "100%", 
+    backgroundSize: "cover",
   },
   cardContent: {
     flexGrow: 1,
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Plants() {
   const classes = useStyles();
   const [plants, setPlants] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   // Fetch plants from backend
   // https://reactjs.org/docs/hooks-intro.html
   // https://www.robinwieruch.de/react-hooks-fetch-data
@@ -90,28 +89,28 @@ export default function Plants() {
 
   function showLightIcon(light_needs) {
     if (light_needs === 3) {
-      return <img src='./light_3.png' alt='Full direct sunlight.' width='100px'/>;
+      return <img src="./light_3.png" alt="Full direct sunlight." width="100px"/>;
     } if (light_needs === 2) {
-      return <img src='./light_2.png' alt='Bright indirect sunlight.' width='100px'/>; 
+      return <img src="./light_2.png" alt="Bright indirect sunlight." width="100px"/>; 
     } if (light_needs === 1) {
-      return <img src='./light_1.png' alt='Low to indirect sunlight.' width='100px'/>;
+      return <img src="./light_1.png" alt="Low to indirect sunlight." width="100px"/>;
     }
-    return '';
+    return "";
   }
 
   function showWaterIcon(water_needs) {
     if (water_needs === 3) {
-      return <img src='./water_3.png' alt='Water thoroughly once a week.' width='65px' />;
+      return <img src="./water_3.png" alt="Water thoroughly once a week." width="65px" />;
     } if (water_needs === 2) {
-      return <img src='./water_2.png' alt='Water thoroughly every 2 - 3 weeks.' width='65px' />; 
+      return <img src="./water_2.png" alt="Water thoroughly every 2 - 3 weeks." width="65px" />; 
     } if (water_needs === 1) {
-      return <img src='./water_1.png' alt='Water thoroughly once a month.' width='65px' />;
+      return <img src="./water_1.png" alt="Water thoroughly once a month." width="65px" />;
     }
-    return '';
+    return "";
   }
 
   async function addPlant(userId, plantId) {
-    let options = {
+    const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +149,7 @@ export default function Plants() {
                   root: classes.inputRoot,
                   input: classes.inputInput,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ "aria-label": "search" }}
 
               />
             </div>
@@ -213,4 +212,3 @@ export default function Plants() {
     </>
   );
 }
-

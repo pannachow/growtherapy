@@ -1,12 +1,12 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link } from '@material-ui/core';
+import React from "react";
+import { Typography } from "@material-ui/core";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Link } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
-import Container from '@material-ui/core/Container';
+import Container from "@material-ui/core/Container";
 
 
 class FAQ extends React.Component {

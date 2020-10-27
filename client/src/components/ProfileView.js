@@ -1,22 +1,21 @@
-import React from 'react';
-import Api from '../helpers/Api';
-import Auth from '../helpers/Auth';
-import ErrorView from './ErrorView';
-import FaceIcon from '@material-ui/icons/Face';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
+import React from "react";
+import Api from "../helpers/Api";
+import Auth from "../helpers/Auth";
+import ErrorView from "./ErrorView";
+import FaceIcon from "@material-ui/icons/Face";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
 
 class ProfileView extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       user: null,
       statusCode: 0,
-      statusText: '',
+      statusText: "",
       plants: []
     };
   }
@@ -28,12 +27,12 @@ class ProfileView extends React.Component {
 
   async getProfile() {
     const userId = Auth.getUserId();
-    const response = await Api.request('GET', `/users/${userId}/profile`);
+    const response = await Api.request("GET", `/users/${userId}/profile`);
     if (response.ok) {
       this.setState({
         user: response.data,
         statusCode: 200,
-        statusText: ''
+        statusText: ""
       });
     } else {
       this.setState({
@@ -46,7 +45,7 @@ class ProfileView extends React.Component {
 
   async getPlants() {
     const userId = Auth.getUserId();
-    const response = await Api.request('GET', `/users/${userId}/favorites`);
+    const response = await Api.request("GET", `/users/${userId}/favorites`);
     this.setState({
       plants: response.data
     });
@@ -64,9 +63,9 @@ class ProfileView extends React.Component {
     let u = this.state.user;
 
     const background = {
-      position: 'absolute',
+      position: "absolute",
       top: 70,
-      width: '100%',
+      width: "100%",
       zIndex: -1,
       opacity: 0.5,
     };
@@ -76,9 +75,9 @@ class ProfileView extends React.Component {
         flexGrow: 1,
       },
       paper: {
-        padding: '20px',
-        textAlign: 'center',
-        color: '#689875',
+        padding: "20px",
+        textAlign: "center",
+        color: "#689875",
       },
     };
 
