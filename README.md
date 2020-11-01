@@ -4,7 +4,7 @@ Growtherapy is a full-stack application that helps you take care of your house p
 
 ![Collage](support/collage.jpg)
 
-# Basic information
+# Basic Information
 
 ![User Flow Diagram](support/user_flow.jpg)
 ![Database Schema](support/database_schema.png)
@@ -18,8 +18,20 @@ Growtherapy is a full-stack application that helps you take care of your house p
 
 ## Setup
 
-Run `yarn` to install packages.
-Run `yarn start` to run the development server.
+Run the server:
+
+```sh
+yarn
+yarn start
+```
+
+Run the client:
+
+```sh
+cd client
+yarn
+yarn start
+```
 
 ## Resources
 
