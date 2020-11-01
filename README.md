@@ -2,11 +2,13 @@
 
 Growtherapy is a full-stack application that helps you take care of your house plants. Moreover, this is an encouragement to explore and practice horticultural therapy. Features include watering, lighting conditions, care-reminder, and note-taking.
 
+![Collage](support/collage.jpg)
+
 # Basic information
 
 ![User Flow Diagram](support/user_flow.jpg)
 ![Database Schema](support/database_schema.png)
-![API Routes](/support/api-routes.jpg)
+![API Routes](support/api-routes.jpg)
 
 ## Objectives
 
