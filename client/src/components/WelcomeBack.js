@@ -18,13 +18,20 @@ function WelcomeBack() {
       <img src="/plant-therapy.jpg" alt="background" style={background} />
       <div style={{ textAlign: "center" }}>
         <br />
-        <Typography variant="h7" align="center" style={{ color: "green", fontWeight: "bold" }} gutterBottom>
+        <Typography
+          variant="h6"
+          align="center"
+          style={{ color: "green", fontWeight: "bold" }}
+          gutterBottom
+        >
           Hello, stranger. We missed you!
         </Typography>
         <br />
         <br />
         <Link underline="none" component={RouterLink} to="/log-in">
-          <Button variant="contained" color="primary">LOG IN</Button>
+          <Button variant="contained" color="primary">
+            LOG IN
+          </Button>
         </Link>
         <br />
         <br />
@@ -34,7 +41,7 @@ function WelcomeBack() {
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
 export default WelcomeBack;
