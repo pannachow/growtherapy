@@ -1,7 +1,7 @@
 import React from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   withRouter,
   Switch,
   Route,
