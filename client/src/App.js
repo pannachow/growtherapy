@@ -28,7 +28,6 @@ import WelcomeBack from "./components/WelcomeBack";
 import PlantView from "./components/PlantView";
 import "./App.css";
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -45,8 +44,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       userId: Auth.getUserId(),
-      loginError: ""
-    }
+      loginError: "",
+    };
   }
 
   async doLogin(email, password) {
@@ -68,20 +67,24 @@ class App extends React.Component {
   }
 
   async doSignUp(newFirstName, newLastName, newEmail, newPassword) {
-    let newUser = { first_name: newFirstName, last_name: newLastName, email: newEmail, password: newPassword };
-    console.log(newUser);
-    let options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newUser)
+    const newUser = {
+      first_name: newFirstName,
+      last_name: newLastName,
+      email: newEmail,
+      password: newPassword,
     };
-    
+    console.log(newUser);
+
     try {
-      let response = await fetch("/users/register", options);
+      const response = await Api.request("POST", "/users/register", newUser);
       if (response.ok) {
         console.log("Registration succeeded");
       } else {
-        console.log("Registration failed", response.status, response.statusText);
+        console.log(
+          "Registration failed",
+          response.status,
+          response.statusText
+        );
       }
       return response.ok;
     } catch (err) {
@@ -89,12 +92,14 @@ class App extends React.Component {
     }
   }
 
-
   render() {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          <Navigation userId={this.state.userId} doLogout={(e) => this.doLogout()} />
+          <Navigation
+            userId={this.state.userId}
+            doLogout={(e) => this.doLogout()}
+          />
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -105,7 +110,7 @@ class App extends React.Component {
             </Route>
 
             <Route path="/plants" exact>
-                <Plants />
+              <Plants />
             </Route>
 
             <Route path="/FAQ" exact>
@@ -119,12 +124,12 @@ class App extends React.Component {
             <Route path="/log-in" exact>
               <Login
                 login={(e, p) => this.doLogin(e, p)}
-                error={this.state.loginError} />
+                error={this.state.loginError}
+              />
             </Route>
 
             <Route path="/sign-up" exact>
-              <SignUp
-                register={(f, l, e, p) => this.doSignUp(f, l, e, p)} />
+              <SignUp register={(f, l, e, p) => this.doSignUp(f, l, e, p)} />
             </Route>
 
             <PrivateRoute
@@ -146,7 +151,6 @@ class App extends React.Component {
             </Route>
 
             <ErrorView code="404" text="Not Found" />
-
           </Switch>
         </Router>
       </ThemeProvider>

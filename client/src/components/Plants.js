@@ -14,6 +14,7 @@ import { Link as RouterLink } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Auth from "../helpers/Auth";
+import Api from "../helpers/Api";
 
 function Copyright() {
   return (
@@ -70,10 +71,8 @@ export default function Plants() {
   // https://www.robinwieruch.de/react-hooks-fetch-data
   useEffect(() => {
     async function fetchPlants() {
-      const result = await fetch("http://localhost:5000/plants/?gt=1");
-
-      const data = await result.json();
-      setPlants(data);
+      const result = await Api.request("GET", "/plants/?gt=1");
+      setPlants(result.data);
     }
     fetchPlants();
   }, []);
@@ -110,18 +109,11 @@ export default function Plants() {
   }
 
   async function addPlant(userId, plantId) {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": Auth.getToken()
-      },
-      body: JSON.stringify({
-        "user_id": userId,
-        "plant_id": plantId
-      })
+    const body = {
+      "user_id": userId,
+      "plant_id": plantId
     };
-    await fetch(`http://localhost:5000/users/${userId}/favorites`, options);
+    await Api.request("POST", `/users/${userId}/favorites`, body);
   }
 
   return (

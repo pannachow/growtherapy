@@ -22,16 +22,16 @@ Run the server:
 
 ```sh
 cd server
-yarn
-yarn start
+npm install
+npm start
 ```
 
 Run the client:
 
 ```sh
 cd client
-yarn
-yarn start
+npm install
+npm start
 ```
 
 ## Resources

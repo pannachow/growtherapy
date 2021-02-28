@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import Calendar from "./Calendar";
 import Typography from "@material-ui/core/Typography";
 import Auth from "../helpers/Auth";
+import Api from "../helpers/Api";
 
 const sunlight = {
   1: "Low to indirect sunlight.",
@@ -33,11 +34,9 @@ class PlantView extends React.Component {
 
   // Fetch plantData from backend
   async componentDidMount() {
-    // const result = await fetch("http://localhost:5000/plants/1258091");
     // https://stackoverflow.com/questions/54114416/how-to-access-this-props-match-params-along-with-other-props
-    const result = await fetch(`http://localhost:5000/plants/${this.props.match.params.id}`);
-    const data = await result.json();
-    this.setState({ plantData: data })
+    const result = await Api.request("GET", `/plants/${this.props.match.params.id}`);
+    this.setState({ plantData: result.data })
   }
 
   render() {
