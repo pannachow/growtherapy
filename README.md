@@ -21,6 +21,7 @@ Growtherapy is a full-stack application that helps you take care of your house p
 Run the server:
 
 ```sh
+cd server
 yarn
 yarn start
 ```
