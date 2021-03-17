@@ -45,7 +45,7 @@ function Navigation(props) {
             <MenuIcon />
           </IconButton>
           <Link underline="none" component={RouterLink} to="/" className={classes.title}>
-            <Typography variant="h5" style={{ color: "white", fontWeight: "bold" }} >
+            <Typography variant="h6" style={{ color: "white" }} >
               GROWTHERAPY
             </Typography>
           </Link>
@@ -55,11 +55,11 @@ function Navigation(props) {
           ) : (
               <>
                 <Link underline="none" component={RouterLink} to="/log-in">
-                  <Button style={{ color: "#97CD80", fontWeight: "bold", fontSize: 70 }} >LOG IN</Button>
+                  <Button style={{ color: "#97CD80", fontWeight: "bold" }} >LOG IN</Button>
                 </Link>
 
                 <Link underline="none" component={RouterLink} to="/sign-up">
-                  <Button style={{ color: "#009472", fontWeight: "bold", fontSize: 70 }} >SIGN UP</Button>
+                  <Button style={{ color: "#009472", fontWeight: "bold" }} >SIGN UP</Button>
                 </Link>
               </>
             )}

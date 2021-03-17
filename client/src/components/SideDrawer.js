@@ -52,24 +52,24 @@ export default function SideDrawer(props) {
           </Link>
 
           <Link color="primary" underline="none" component={RouterLink} to="/plants">
-          <ListItem button>
-            <ListItemIcon><LocalFloristOutlinedIcon /></ListItemIcon>
-            <ListItemText primary="Plants" />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon><LocalFloristOutlinedIcon /></ListItemIcon>
+              <ListItemText primary="Plants" />
+            </ListItem>
           </Link>
 
           <Link color="primary" underline="none" component={RouterLink} to="/FAQ">
-          <ListItem button>
-            <ListItemIcon><ContactSupportIcon /></ListItemIcon>
-            <ListItemText primary="FAQ" />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon><ContactSupportIcon /></ListItemIcon>
+              <ListItemText primary="FAQ" />
+            </ListItem>
           </Link>
 
           <Link color="primary" underline="none" component={RouterLink} to="/contact-us">
-          <ListItem button>
-            <ListItemIcon><ContactMailIcon /></ListItemIcon>
-            <ListItemText primary="Contact Us" />
-          </ListItem>
+            <ListItem button>
+              <ListItemIcon><ContactMailIcon /></ListItemIcon>
+              <ListItemText primary="Contact Us" />
+            </ListItem>
           </Link>
         </List>
       </div>

@@ -26,7 +26,6 @@ import SignUp from "./components/SignUp";
 import Message from "./components/Message";
 import WelcomeBack from "./components/WelcomeBack";
 import PlantView from "./components/PlantView";
-import "./App.css";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,6 +35,11 @@ const theme = createMuiTheme({
     secondary: {
       main: "#009572",
     },
+  },
+  typography: {
+    fontFamily: ["Papyrus"],
+    fontSize: 12,
+    fontWeightRegular: "600"
   },
 });
 

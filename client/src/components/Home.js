@@ -24,8 +24,8 @@ export default function Home() {
     <div>
       <div className={classes.heroContent}>
         <Container >
-          <Typography style={{color: "white", fontWeight: "bold"}} variant="h2" align="center" gutterBottom>
-            THE PLANTS LOVER
+          <Typography style={{color: "white", fontWeight: "bold"}} variant="h3" align="center" gutterBottom>
+            THE&nbsp;&nbsp;PLANTS&nbsp;&nbsp;LOVER
           </Typography>
           <div className={classes.heroButtons}>
             <Grid container spacing={2} justify="center">
