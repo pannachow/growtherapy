@@ -12,9 +12,6 @@ import Typography from "@material-ui/core/Typography";
 import UserMenu from "./UserMenu";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -38,14 +35,20 @@ function Navigation(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <>
       <AppBar position="static">
         <Toolbar>
-          <IconButton onClick={toggleDrawer(true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton
+            onClick={toggleDrawer(true)}
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
             <MenuIcon />
           </IconButton>
           <Link underline="none" component={RouterLink} to="/" className={classes.title}>
-            <Typography variant="h6" style={{ color: "white" }} >
+            <Typography variant="h6" style={{ color: "white" }}>
               GROWTHERAPY
             </Typography>
           </Link>
@@ -53,21 +56,20 @@ function Navigation(props) {
           {props.userId ? (
             <UserMenu doLogout={props.doLogout} userId={props.userId} />
           ) : (
-              <>
-                <Link underline="none" component={RouterLink} to="/log-in">
-                  <Button style={{ color: "#97CD80", fontWeight: "bold" }} >LOG IN</Button>
-                </Link>
+            <>
+              <Link underline="none" component={RouterLink} to="/log-in">
+                <Button style={{ color: "#97CD80", fontWeight: "bold" }}>LOG IN</Button>
+              </Link>
 
-                <Link underline="none" component={RouterLink} to="/sign-up">
-                  <Button style={{ color: "#009472", fontWeight: "bold" }} >SIGN UP</Button>
-                </Link>
-              </>
-            )}
-
+              <Link underline="none" component={RouterLink} to="/sign-up">
+                <Button style={{ color: "#009472", fontWeight: "bold" }}>SIGN UP</Button>
+              </Link>
+            </>
+          )}
         </Toolbar>
       </AppBar>
       <SideDrawer open={state.open} toggleDrawer={toggleDrawer} />
-    </div>
+    </>
   );
 }
 

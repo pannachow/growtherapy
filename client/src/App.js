@@ -1,11 +1,8 @@
 import React from "react";
+import { HashRouter as Router, withRouter, Switch, Route } from "react-router-dom";
+import Box from "@material-ui/core/Box";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import {
-  HashRouter as Router,
-  withRouter,
-  Switch,
-  Route,
-} from "react-router-dom";
 
 import Auth from "./helpers/Auth";
 import Api from "./helpers/Api";
@@ -39,7 +36,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: ["Papyrus"],
     fontSize: 12,
-    fontWeightRegular: "600"
+    fontWeightRegular: "600",
   },
 });
 
@@ -84,11 +81,7 @@ class App extends React.Component {
       if (response.ok) {
         console.log("Registration succeeded");
       } else {
-        console.log(
-          "Registration failed",
-          response.status,
-          response.statusText
-        );
+        console.log("Registration failed", response.status, response.statusText);
       }
       return response.ok;
     } catch (err) {
@@ -99,63 +92,56 @@ class App extends React.Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Router>
-          <Navigation
-            userId={this.state.userId}
-            doLogout={(e) => this.doLogout()}
-          />
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
+          <Box display="flex" flexDirection="column" minHeight="100vh">
+            <Navigation userId={this.state.userId} doLogout={(e) => this.doLogout()} />
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
 
-            <Route path="/about-us" exact>
-              <AboutUs />
-            </Route>
+              <Route path="/about-us" exact>
+                <AboutUs />
+              </Route>
 
-            <Route path="/plants" exact>
-              <Plants />
-            </Route>
+              <Route path="/plants" exact>
+                <Plants />
+              </Route>
 
-            <Route path="/FAQ" exact>
-              <FAQ />
-            </Route>
+              <Route path="/FAQ" exact>
+                <FAQ />
+              </Route>
 
-            <Route path="/contact-us" exact>
-              <ContactUs />
-            </Route>
+              <Route path="/contact-us" exact>
+                <ContactUs />
+              </Route>
 
-            <Route path="/log-in" exact>
-              <Login
-                login={(e, p) => this.doLogin(e, p)}
-                error={this.state.loginError}
-              />
-            </Route>
+              <Route path="/log-in" exact>
+                <Login login={(e, p) => this.doLogin(e, p)} error={this.state.loginError} />
+              </Route>
 
-            <Route path="/sign-up" exact>
-              <SignUp register={(f, l, e, p) => this.doSignUp(f, l, e, p)} />
-            </Route>
+              <Route path="/sign-up" exact>
+                <SignUp register={(f, l, e, p) => this.doSignUp(f, l, e, p)} />
+              </Route>
 
-            <PrivateRoute
-              path="/users/:userId/profile"
-              exact
-              component={ProfileView}
-            />
+              <PrivateRoute path="/users/:userId/profile" exact component={ProfileView} />
 
-            <Route path="/welcome" exact>
-              <Message />
-            </Route>
+              <Route path="/welcome" exact>
+                <Message />
+              </Route>
 
-            <Route path="/welcome-back" exact>
-              <WelcomeBack />
-            </Route>
+              <Route path="/welcome-back" exact>
+                <WelcomeBack />
+              </Route>
 
-            <Route path="/plant-view/:id" exact>
-              <PlantView />
-            </Route>
+              <Route path="/plant-view/:id" exact>
+                <PlantView />
+              </Route>
 
-            <ErrorView code="404" text="Not Found" />
-          </Switch>
+              <ErrorView code="404" text="Not Found" />
+            </Switch>
+          </Box>
         </Router>
       </ThemeProvider>
     );
